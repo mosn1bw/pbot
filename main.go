@@ -50,7 +50,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			var cow string
 			r := rand.New(rand.NewSource(time.Now().UnixNano()))
-			cow = "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/" + r.Intn(20) + ".jpg"
+			cow = "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/" + fmt.Sprintf("%d", r.Intn(20))  + ".jpg"
 
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:     
