@@ -13,10 +13,8 @@
 package main
 
 import (
-    	"bufio"
 	"fmt"
 	"log"
-    	"io"
     	"time"
 	"net/http"
 	"os"
