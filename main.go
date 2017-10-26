@@ -55,7 +55,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					case Contains(message.Text,"56"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("5566得第一")).Do() 
 					case Contains(message.Text,"母牛"):
-						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage("http://img.appledaily.com.tw/images/ReNews/20150112/640_0ba2930e7d32af7810360990d887f33d.jpg","http://img.appledaily.com.tw/images/ReNews/20150112/640_0ba2930e7d32af7810360990d887f33d.jpg")).Do() 
+						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage("https://cdn2.ettoday.net/images/1522/d1522740.jpg","https://cdn2.ettoday.net/images/1522/d1522740.jpg")).Do() 
 				}
 			}
 
