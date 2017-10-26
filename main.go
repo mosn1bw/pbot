@@ -61,3 +61,32 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 func Contains(s, substr string) bool {
      return Index(s, substr) != -1
 }
+
+func Index(s string, sep string, ignoreCase bool) int {
+    n := len(sep)
+    if n == 0 {
+        return 0
+    }
+    //to Lower
+    if ignoreCase == true {
+        s = strings.ToLower(s)
+        sep = strings.ToLower(sep)
+    }
+    c := sep[0]
+    if n == 1 {
+        // special case worth making fast
+        for i := 0; i < len(s); i++ {
+            if s[i] == c {
+                return i
+            }
+        }
+        return -1
+    }
+    // n > 1
+    for i := 0; i+n <= len(s); i++ {
+        if s[i] == c && s[i:i+n] == sep {
+            return i
+        }
+    }
+    return -1
+}
