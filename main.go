@@ -54,6 +54,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("87分，不能再高惹")).Do() 
 					case Contains(message.Text,"56"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("5566得第一")).Do() 
+					case Contains(message.Text,"母牛"):
+						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage("http://img.appledaily.com.tw/images/ReNews/20150112/640_0ba2930e7d32af7810360990d887f33d.jpg","http://img.appledaily.com.tw/images/ReNews/20150112/640_0ba2930e7d32af7810360990d887f33d.jpg")).Do() 
 				}
 			}
 
