@@ -17,6 +17,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"math/rand"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -48,7 +49,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			var cow string
-			cow = "https://cdn2.ettoday.net/images/1522/d1522740.jpg"
+			r := rand.New(rand.NewSource(time.Now().UnixNano()))
+			cow = "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/" + r.Intn(20) + ".jpg"
+
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:     
 				switch {
