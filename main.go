@@ -47,12 +47,13 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
-			var str string //声明一个字符串
-			str = message.Text  //赋值
-
-			if strings.Contains(str,"go") {
-				bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(": OK!")).Do()
+			switch message := event.Message.(type) {
+			case *linebot.TextMessage:
+				if strings.Contains(message.Text,"go") {					
+					bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(": OK!")).Do()
+				}
 			}
+
 		}
 	}
 }
