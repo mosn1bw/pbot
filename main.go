@@ -62,15 +62,10 @@ func Contains(s, substr string) bool {
      return Index(s, substr) != -1
 }
 
-func Index(s string, sep string, ignoreCase bool) int {
+func Index(s string, sep string) int {
     n := len(sep)
     if n == 0 {
         return 0
-    }
-    //to Lower
-    if ignoreCase == true {
-        s = strings.ToLower(s)
-        sep = strings.ToLower(sep)
     }
     c := sep[0]
     if n == 1 {
