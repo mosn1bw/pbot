@@ -58,6 +58,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("5566得第一")).Do() 
 					case Contains(message.Text,"母牛"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
+					case Contains(message.Text,"洗眼"):
+						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
+					case Contains(message.Text,"乳牛"):
+						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
+					case Contains(message.Text,"淨化"):
+						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
 				}
 			}
 
