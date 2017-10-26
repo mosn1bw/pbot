@@ -70,6 +70,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
 					case Contains(message.Text,"刀塔"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage("https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/6569950-1490833625.jpg","https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/6569950-1490833625.jpg")).Do() 
+					case Contains(message.Text,"黑人問號"):
+						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage("https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/blackman.jpg","https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/blackman.jpg")).Do() 
 				}
 			}
 
