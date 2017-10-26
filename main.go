@@ -13,8 +13,10 @@
 package main
 
 import (
+    	"bufio"
 	"fmt"
 	"log"
+    	"io"
     	"time"
 	"net/http"
 	"os"
@@ -47,6 +49,22 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fi, err := os.Open("https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/buffer/list.txt")
+    	if err != nil {
+        	fmt.Printf("Error: %s\n", err)
+        	return
+    	}
+    	defer fi.Close()
+
+    	br := bufio.NewReader(fi)
+    	for {
+        	a, _, c := br.ReadLine()
+        	if c == io.EOF {
+            	break
+        	}
+        	fmt.Println(string(a))
+    	}
+	
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			var cow string
@@ -59,7 +77,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					case Contains(message.Text,"87"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("87分，不能再高惹")).Do() 
 					case Contains(message.Text,"56"):
-						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("5566得第一")).Do() 
+						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(string(a))).Do() 
 					case Contains(message.Text,"母牛"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
 					case Contains(message.Text,"洗眼"):
