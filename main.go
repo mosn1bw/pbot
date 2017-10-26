@@ -47,6 +47,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
+			var cow string
+			cow = "https://cdn2.ettoday.net/images/1522/d1522740.jpg"
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:     
 				switch {
@@ -55,7 +57,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					case Contains(message.Text,"56"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("5566得第一")).Do() 
 					case Contains(message.Text,"母牛"):
-						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage("https://cdn2.ettoday.net/images/1522/d1522740.jpg","https://cdn2.ettoday.net/images/1522/d1522740.jpg")).Do() 
+						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
 				}
 			}
 
