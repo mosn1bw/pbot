@@ -92,7 +92,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								food = "小白菜"
 						}
 						i:=1
-						if food != "default"{
+						if food == "default"{
 							for i<=len(list_array){
 								if Contains(list_array[i],food){
 									price=strings.Replace(list_array[i], food + " ","",1)
