@@ -60,6 +60,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
     	br := bufio.NewReader(fi)
 	var list string
 	var price string
+	var stock string
 	var food string
 	url := "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
     	for {
@@ -82,9 +83,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:     
 				switch {
-					case Contains(message.Text,"87"):
-						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("87分，不能再高惹")).Do() 
-					case Contains(message.Text,"菜")&&(Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算")):
+//賣菜的code
+					case Contains(message.Text,"菜")||Contains(message.Text,"葉"):
 						food = ""
 						switch{
 							case Contains(message.Text,"高麗菜"):
@@ -100,13 +100,18 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								menu = strings.Split(list_array[i], " ")
 								if menu[0] == food{
 									price=menu[1]
+									stock=menu[2]
 									break
 								}
 								i++
 							}
-							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
+							switch{
+								case Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
+									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
+							}
 						}
-					case (Contains(message.Text,"斑")||Contains(message.Text,"班"))&&(Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算")):
+//石斑魚的code
+					case Contains(message.Text,"斑")||Contains(message.Text,"班"):
 						food = ""
 						switch{
 							case Contains(message.Text,"龍虎"):
@@ -114,7 +119,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							case Contains(message.Text,"青"):
 								food = "青斑"
 							case Contains(message.Text,"珍珠"):
-								food = "珍珠石斑"							
+								food = "珍珠石斑"	
 						}
 						i:=0
 						if food != ""{
@@ -123,14 +128,23 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								menu = strings.Split(list_array[i], " ")
 								if menu[0] == food{
 									price=menu[1]
+									stock=menu[2]
 									break
 								}
 								i++
 							}
-							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
+							switch{
+								case Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
+									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
+								case Contains(message.Text,"還有多少")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存"):
+									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "大概還有" + stock + "尾可以買，賣完就沒了喔!! 趕快來電088953096/0939220743黃先生")).Do() 
+							}
 						}else{
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("拍謝啦! 我是笨笨的電腦，不知道您要哪種石斑捏，我們有龍虎石斑、青斑、還有珍珠石斑")).Do() 
-						}
+						}					
+//以下是喇賽的code
+					case Contains(message.Text,"87"):
+						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("87分，不能再高惹")).Do() 
 					case Contains(message.Text,"母牛"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
 					case Contains(message.Text,"洗眼"):
