@@ -49,7 +49,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fi, err := os.Open("https://drive.google.com/file/d/0B5J3gjofbgUnMWhyeHM2Vk4yQjA/view?usp=sharing")
+	fi, err := os.Open("LineBotTemplate/buffer/list.txt")
     	if err != nil {
         	fmt.Printf("Error: %s\n", err)
         	return
