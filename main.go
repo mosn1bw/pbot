@@ -114,6 +114,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					case Contains(message.Text,"斑")||Contains(message.Text,"班"):
 						food = ""
 						msg := ""
+						check := 0
 						switch{
 							case Contains(message.Text,"龍虎"):
 								food = "龍虎石斑"
@@ -123,6 +124,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								food = "珍珠石斑"
 							default:
 								msg = "拍謝啦! 我是笨笨的電腦，不知道您要哪種石斑捏，我們有龍虎石斑、青斑、還有珍珠石斑"
+								check = 1
 						}
 						i:=0
 						for i<=len(list_array){
@@ -138,10 +140,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						switch{
 							case Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
 								msg = food + "一斤" + price
+								check = 1
 							case Contains(message.Text,"還有多少")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存")||Contains(message.Text,"還有幾"):
 								msg = food + "大概還有" + stock + "尾可以買，賣完就沒了喔!! 趕快來電088953096/0939220743黃先生" 
+								check = 1
 						}
-						if(msg != "")&&(food != ""){
+						if check == 1{
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(msg)).Do() 
 						}
 //以下是喇賽的code
