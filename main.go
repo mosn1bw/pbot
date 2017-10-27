@@ -85,18 +85,15 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("87分，不能再高惹")).Do() 
 					case Contains(message.Text,"菜")&&(Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算")):
 						food = ""
-						check := 1
 						switch{
 							case Contains(message.Text,"高麗菜"):
 								food = "高麗菜"
 							case Contains(message.Text,"小白菜"):
 								food = "小白菜"
-							default:
-								check = 0
 							
 						}
 						i:=1
-						if check == 1{
+						if food != ""{
 							for i<=len(list_array){
 								if Contains(list_array[i],food){
 									price=strings.Replace(list_array[i], food + " ","",1)
@@ -104,8 +101,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								}
 								i++
 							}
+							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 						}
-						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 					case Contains(message.Text,"母牛"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
 					case Contains(message.Text,"洗眼"):
