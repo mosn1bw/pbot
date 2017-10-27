@@ -93,11 +93,11 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								food = "小白菜"
 							
 						}
-						var menu []string
-						menu = strings.Split(list_array[i], " ")
 						i:=1
 						if food != ""{
 							for i<=len(list_array){
+								var menu []string
+								menu = strings.Split(list_array[i], " ")
 								if menu[1] == food{
 									price=menu[2]
 									break
