@@ -49,7 +49,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fi, err := os.Open("./LineBotTemplate/buffer/list.txt")
+	fi, err := os.Open("LineBotTemplate/buffer/list.txt")
     	if err != nil {
         	fmt.Printf("Error: %s\n", err)
         	return
