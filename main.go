@@ -120,6 +120,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								food = "青斑"
 							case Contains(message.Text,"珍珠"):
 								food = "珍珠石斑"
+							case Contains(message.Text,"石斑"):
+								food = "石斑"
 						}
 						i:=0
 						for i<=len(list_array){
@@ -134,13 +136,13 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						}
 						switch{
 							case Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
-								if food != ""{								
+								if food != "石斑"{								
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 								}else{
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("拍謝啦! 我是笨笨的電腦，不知道您要問哪種石斑捏，我們有龍虎石斑、青斑、還有珍珠石斑")).Do()
 								}
 							case Contains(message.Text,"還有多少")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存")||Contains(message.Text,"還有幾"):
-								if food != ""{
+								if food != "石斑"{
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "大概還有" + stock + "尾可以買，賣完就沒了喔!! 趕快來電088953096/0939220743黃先生")).Do() 
 								}else{
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("拍謝啦! 我是笨笨的電腦，不知道您要問哪種石斑捏，我們有龍虎石斑、青斑、還有珍珠石斑")).Do()
