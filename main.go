@@ -106,6 +106,31 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							}
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 						}
+					case (Contains(message.Text,"斑")||Contains(message.Text,"班"))&&(Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算")):
+						food = ""
+						switch{
+							case Contains(message.Text,"龍虎"):
+								food = "龍虎石斑"
+							case Contains(message.Text,"青"):
+								food = "青斑"
+							case Contains(message.Text,"珍珠"):
+								food = "珍珠石斑"							
+						}
+						i:=0
+						if food != ""{
+							for i<=len(list_array){
+								var menu []string
+								menu = strings.Split(list_array[i], " ")
+								if menu[0] == food{
+									price=menu[1]
+									break
+								}
+								i++
+							}
+							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
+						}else{
+							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("拍謝啦! 我是笨笨的電腦，不知道您要哪種石斑捏，我們有龍虎石斑、青斑、還有珍珠石斑")).Do() 
+						}
 					case Contains(message.Text,"母牛"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
 					case Contains(message.Text,"洗眼"):
