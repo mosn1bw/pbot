@@ -20,6 +20,7 @@ import (
     	"time"
 	"net/http"
 	"os"
+	"strings"
 	"math/rand"
 
 	"github.com/line/line-bot-sdk-go/linebot"
@@ -58,13 +59,19 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
     	br := bufio.NewReader(fi)
 	var a string
+	var list string
+	var price string
+	var food string
     	for {
         	a, _, c := br.ReadLine()
         	if c == io.EOF {
             	break
         	}
-        	fmt.Println(string(a))
+        	list = list + "&" + a
     	}
+	
+	var list_array string
+	list_array = strings.Split(list, "&")
 	
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
@@ -77,8 +84,22 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				switch {
 					case Contains(message.Text,"87"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("87分，不能再高惹")).Do() 
-					case Contains(message.Text,"56"):
-						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(string(a))).Do() 
+					case Contains(message.Text,"菜")&&Contains(message.Text,"多少錢"):
+						switch{
+							case Contains(message.Text,"高麗菜"):
+								food = "高麗菜"
+							case Contains(message.Text,"小白菜"):
+								food = "小白菜"
+						}
+						i:=1
+						for i<=len(list_array){
+							if Contains(list_array[i],food){
+								price=strings.Replace(list_array[i], food + " ")
+								break
+							}
+							i++
+						}
+						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 					case Contains(message.Text,"母牛"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
 					case Contains(message.Text,"洗眼"):
