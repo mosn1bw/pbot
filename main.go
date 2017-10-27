@@ -93,7 +93,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								food = "小白菜"
 							
 						}
-						i:=1
+						i:=0
 						if food != ""{
 							for i<=len(list_array){
 								var menu []string
