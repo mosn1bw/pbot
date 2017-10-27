@@ -122,7 +122,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								food = "青斑"
 							case Contains(message.Text,"珍珠"):
 								food = "珍珠石斑"
-							default:
+							case Contains(message.Text,"石斑"):
 								msg = "拍謝啦! 我是笨笨的電腦，不知道您要哪種石斑捏，我們有龍虎石斑、青斑、還有珍珠石斑"
 								check = 1
 						}
