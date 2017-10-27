@@ -61,6 +61,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	var list string
 	var price string
 	var food string
+	url := "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
     	for {
         	a, _, c := br.ReadLine()
         	if c == io.EOF {
@@ -76,7 +77,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			var cow string
 			r := rand.New(rand.NewSource(time.Now().UnixNano()))
-			cow = "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/cow/" + fmt.Sprintf("%d", r.Intn(10))  + ".jpg"
+			cow = url + "cow/" + fmt.Sprintf("%d", r.Intn(10))  + ".jpg"
 
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:     
@@ -112,9 +113,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					case Contains(message.Text,"淨化"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
 					case Contains(message.Text,"刀塔"):
-						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage("https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/6569950-1490833625.jpg","https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/6569950-1490833625.jpg")).Do() 
+						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(url + "6569950-1490833625.jpg", url + "6569950-1490833625.jpg")).Do() 
 					case Contains(message.Text,"黑人問號"):
-						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage("https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/blackman.jpg","https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/blackman.jpg")).Do() 
+						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(url + "blackman.jpg", url + "blackman.jpg")).Do() 
 				}
 			}
 
