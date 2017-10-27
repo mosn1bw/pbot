@@ -67,7 +67,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
         	if c == io.EOF {
             	break
         	}
-        	list = list + "&" + a
+		list = list + "&" + string(a)
     	}
 	
 	var list_array string
