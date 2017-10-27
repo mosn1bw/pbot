@@ -84,7 +84,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					case Contains(message.Text,"87"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("87分，不能再高惹")).Do() 
 					case Contains(message.Text,"菜")&&(Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算")):
-						food = ""
+						food = "default"
 						switch{
 							case Contains(message.Text,"高麗菜"):
 								food = "高麗菜"
@@ -92,7 +92,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								food = "小白菜"
 						}
 						i:=1
-						if food != ""{
+						if food != "default"{
 							for i<=len(list_array){
 								if Contains(list_array[i],food){
 									price=strings.Replace(list_array[i], food + " ","",1)
