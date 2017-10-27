@@ -58,7 +58,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
     	defer fi.Close()
 
     	br := bufio.NewReader(fi)
-	var a string
 	var list string
 	var price string
 	var food string
