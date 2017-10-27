@@ -93,8 +93,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								food = "小白菜"
 							
 						}
-						i:=0
 						if food != ""{
+							i:=0
 							for i<=len(list_array){
 								var menu []string
 								menu = strings.Split(list_array[i], " ")
@@ -113,8 +113,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 //石斑魚的code
 					case Contains(message.Text,"斑")||Contains(message.Text,"班"):
 						food = ""
-						msg := ""
-						check := 0
 						switch{
 							case Contains(message.Text,"龍虎"):
 								food = "龍虎石斑"
@@ -122,9 +120,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								food = "青斑"
 							case Contains(message.Text,"珍珠"):
 								food = "珍珠石斑"
-							case Contains(message.Text,"石斑"):
-								msg = "拍謝啦! 我是笨笨的電腦，不知道您要哪種石斑捏，我們有龍虎石斑、青斑、還有珍珠石斑"
-								check = 1
 						}
 						i:=0
 						for i<=len(list_array){
@@ -139,18 +134,18 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						}
 						switch{
 							case Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
-								if check == 0{
-									msg = food + "一斤" + price
-									check = 1
+								if food != ""{								
+									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
+								}else{
+									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("拍謝啦! 我是笨笨的電腦，不知道您要問哪種石斑捏，我們有龍虎石斑、青斑、還有珍珠石斑")).Do()
 								}
 							case Contains(message.Text,"還有多少")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存")||Contains(message.Text,"還有幾"):
-								if check == 0{
-									msg = food + "大概還有" + stock + "尾可以買，賣完就沒了喔!! 趕快來電088953096/0939220743黃先生" 
-									check = 1
+							essage.Text,"怎麼算"):
+								if food != ""{								
+									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "大概還有" + stock + "尾可以買，賣完就沒了喔!! 趕快來電088953096/0939220743黃先生")).Do() 
+								}else{
+									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("拍謝啦! 我是笨笨的電腦，不知道您要問哪種石斑捏，我們有龍虎石斑、青斑、還有珍珠石斑")).Do()
 								}
-						}
-						if check == 1{
-							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(msg)).Do() 
 						}
 //以下是喇賽的code
 					case Contains(message.Text,"87"):
