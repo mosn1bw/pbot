@@ -94,7 +94,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						i:=1
 						for i<=len(list_array){
 							if Contains(list_array[i],food){
-								price=strings.Replace(list_array[i], food + " ")
+								price=strings.Replace(list_array[i], food + " ",1)
 								break
 							}
 							i++
