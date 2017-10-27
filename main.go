@@ -83,7 +83,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				switch {
 					case Contains(message.Text,"87"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("87分，不能再高惹")).Do() 
-					case Contains(message.Text,"菜")&&Contains(message.Text,"多少錢"):
+					case Contains(message.Text,"菜")&&(Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算")):
 						switch{
 							case Contains(message.Text,"高麗菜"):
 								food = "高麗菜"
