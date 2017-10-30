@@ -11,8 +11,6 @@
 // limitations under the License.
 
 package main
-import "database/sql"
-import _ "github.com/go-sql-driver/mysql"
 import (
     	"bufio"
 	"fmt"
@@ -31,7 +29,6 @@ var bot *linebot.Client
 
 func main() {
 	var err error
-	db, err := sql.Open("mysql", "user:password@/dbname")
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
 	log.Println("Bot:", bot, " err:", err)
 	http.HandleFunc("/callback", callbackHandler)
