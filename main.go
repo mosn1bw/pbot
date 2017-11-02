@@ -61,6 +61,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	var price string
 	var stock string
 	var food string
+	var uid string
 	
 	admin := "U83bb64e03c849e6ed897f9c556b0d4c1"
 	
@@ -85,11 +86,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			cow = url + "cow/" + fmt.Sprintf("%d", r.Intn(10))  + ".jpg"
 
 			switch message := event.Message.(type) {
-			case *linebot.TextMessage:     
+			case *linebot.TextMessage:
+				uid = event.Source.UserID
 				switch {
 //賣菜的code
 					case Contains(message.Text,"幫我查ID"):
-						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(event.Source.UserID)).Do() 
+						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
 					case Contains(message.Text,"菜")||Contains(message.Text,"葉"):						
 						food = ""
 						switch{
