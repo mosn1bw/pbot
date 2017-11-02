@@ -61,6 +61,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	var price string
 	var stock string
 	var food string
+	var uid string
 	url := "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
     	for {
         	a, _, c := br.ReadLine()
@@ -72,14 +73,15 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	
 	var list_array []string
 	list_array = strings.Split(list, "&")
-	
 	for _, event := range events {
+		if event.Type == linebot.EventSource {
+			uid = event.Source.(UserID)
+		}
 		if event.Type == linebot.EventTypeMessage {
 			var cow string
 			r := rand.New(rand.NewSource(time.Now().UnixNano()))
 			cow = url + "cow/" + fmt.Sprintf("%d", r.Intn(10))  + ".jpg"
 
-			uid := event.Source.(UserID)
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:     
 				switch {
