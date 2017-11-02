@@ -85,6 +85,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			case *linebot.TextMessage:     
 				switch {
 //賣菜的code
+					case Contains(message.Text,"幫我查ID"):
+						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(event.Source.UserID)).Do() 
 					case Contains(message.Text,"菜")||Contains(message.Text,"葉"):						
 						food = ""
 						switch{
@@ -110,7 +112,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								case Contains(message.Text,"一斤多少")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 								case Contains(message.Text,"要買"):
-									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(event.Source.UserID)).Do() 
+									bot.ReplyMessage(event.ReplyToken, linebot.PushMessage(event.Source.UserID,"有人要買菜")).Do() 
 							}
 						}
 //石斑魚的code
