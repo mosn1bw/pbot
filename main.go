@@ -75,7 +75,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	list_array = strings.Split(list, "&")
 	for _, event := range events {
 		if event.Type == linebot.EventSource {
-			*linebot.EventSource uid := event.Source.(UserID)
+			uid = event.Source.(UserID)
 		}
 		if event.Type == linebot.EventTypeMessage {
 			var cow string
