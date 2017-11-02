@@ -61,7 +61,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	var price string
 	var stock string
 	var food string
-	var uid string
+	
+	uid = uid = event.Source.(UserID)
+	
 	url := "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
     	for {
         	a, _, c := br.ReadLine()
@@ -74,9 +76,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	var list_array []string
 	list_array = strings.Split(list, "&")
 	for _, event := range events {
-		if event.Type == linebot.EventSource {
-			uid = event.Source.(UserID)
-		}
+		//if event.Type == linebot.EventSource {
+		//	uid = event.Source.(UserID)
+		//}
 		if event.Type == linebot.EventTypeMessage {
 			var cow string
 			r := rand.New(rand.NewSource(time.Now().UnixNano()))
@@ -86,8 +88,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			case *linebot.TextMessage:     
 				switch {
 //賣菜的code
-					case Contains(message.Text,"菜")||Contains(message.Text,"葉"):
-						
+					case Contains(message.Text,"菜")||Contains(message.Text,"葉"):						
 						food = ""
 						switch{
 							case Contains(message.Text,"高麗菜"):
@@ -112,7 +113,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								case Contains(message.Text,"一斤多少")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 								case Contains(message.Text,"要買"):
-									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
+									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(event.Source.(UserID))).Do() 
 							}
 						}
 //石斑魚的code
