@@ -79,7 +79,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			r := rand.New(rand.NewSource(time.Now().UnixNano()))
 			cow = url + "cow/" + fmt.Sprintf("%d", r.Intn(10))  + ".jpg"
 
-			uid := event.Message.(UserID)
+			uid := event.Source.(UserID)
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:     
 				switch {
