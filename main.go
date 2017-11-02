@@ -63,8 +63,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	var food string
 	var uid string
 	
-	admin := "U8ebf1e2a66c196a38b239b99ccc2bf10"
-	
 	url := "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
     	for {
         	a, _, c := br.ReadLine()
@@ -117,7 +115,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								case Contains(message.Text,"一斤多少")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 								case Contains(message.Text,"要買"):
-									bot.PushMessage(admin,linebot.NewTextMessage("有人要買菜")).Do() 
+									bot.PushMessage("U8ebf1e2a66c196a38b239b99ccc2bf10",linebot.NewTextMessage("有人要買菜")).Do() 
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 
 							}
 						}
