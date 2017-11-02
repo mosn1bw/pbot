@@ -116,6 +116,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 								case Contains(message.Text,"要買"):
 									bot.PushMessage(admin,linebot.NewTextMessage("有人要買菜")).Do() 
+									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 
 							}
 						}
 //石斑魚的code
