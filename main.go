@@ -158,7 +158,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 										bot.PushMessage(admin,linebot.NewTextMessage(profile[2] + "要買" + food)).Do() 
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 	
 										profile[6] = "1"
-										Update_Profile(profile)
+										Update_Profile(user_array,profile)
 									}
 							}
 						}else{
@@ -229,28 +229,30 @@ func Contains(s, substr string) bool {
      return Index(s, substr) != -1
 }
 
-func Update_Profile(u_array []string) {
+func Update_Profile(all_array []string,u_array []string) {
    	f, err := os.OpenFile("/buffer/userlist.txt", os.O_CREATE|os.O_WRONLY, 0)
     	if err != nil {
         	fmt.Printf("Error: %s\n", err)
         	return
     	}
     	defer f.Close()
-	f.WriteString("ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態\n")
+	f.WriteString("ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態 & \n")
 	
-	//使用 Flush 来确保所有缓存的操作已写入底层写入器。
-
 	e:=0
-	for e<=len(u_array){
-		i:=0
-		for i<=6{
-			f.WriteString(u_array[i] + " & ")
-			i++
+	for e<=len(all_array){
+		var temp []string
+		temp = strings.Split(all_array[e], " & ")
+		if temp[0] == u_array[0]{
+			i:=0
+			all_array[e] = "";
+			for i<=6{
+				all_array[e] = all_array[e] + u_array[i] + " & "
+				i++
+			}
 		}
-		f.WriteString("\n")
+		f.WriteString(all_array[e] + "\n")
 		e++
 	}
-	f.Flush()
 }
 
 func Index(s string, sep string) int {
