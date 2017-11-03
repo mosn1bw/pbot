@@ -249,7 +249,7 @@ func Update_Profile(all_array []string,u_array []string) {
 				i++
 			}
 		}
-		buffer = buffer + all_array[e] + "\n")
+		buffer = buffer + all_array[e] + "\n"
 		e++
 	}
 	f.WriteString(buffer)
