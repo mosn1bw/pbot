@@ -115,7 +115,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				uid = event.Source.UserID
 				e:=0
 				var profile []string
-				for e<=len(user_array){
+				for e<=len(user_array)-1{
 					var menu []string
 					menu = strings.Split(user_array[e], " & ")
 					if menu[0] == uid{
