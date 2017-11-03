@@ -235,7 +235,7 @@ func Update_Profile(all_array []string,u_array []string) {
         	return
     	}
     	defer f.Close()
-		f.WriteString("ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態 & \n")
+	buffer = "ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態 & \n"
 	bot.PushMessage("U83bb64e03c849e6ed897f9c556b0d4c1",linebot.NewTextMessage(u_array[2] + "要買菜")).Do() 
 	e:=0
 	for e<=len(all_array){
@@ -249,9 +249,10 @@ func Update_Profile(all_array []string,u_array []string) {
 				i++
 			}
 		}
-		f.WriteString(all_array[e] + "\n")
+		buffer = buffer + all_array[e] + "\n")
 		e++
 	}
+	f.WriteString(buffer)
 }
 
 func Index(s string, sep string) int {
