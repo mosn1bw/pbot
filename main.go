@@ -237,7 +237,7 @@ func Update_Profile(all_array []string,u_array []string) {
     	}
     	defer f.Close()
 	ioutil.WriteFile("/buffer/userlist.txt", []byte("Hi\n"), 0666)
-	bot.PushMessage(admin,linebot.NewTextMessage(u_array[2] + "要買菜")).Do() 
+	bot.PushMessage("U83bb64e03c849e6ed897f9c556b0d4c1",linebot.NewTextMessage(u_array[2] + "要買菜")).Do() 
 	e:=0
 	for e<=len(all_array){
 		var temp []string
