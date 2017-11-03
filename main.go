@@ -78,7 +78,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	
 	list_array = strings.Split(list, "&")
 	
-	fi2, err2 := os.Open("buffer/list.txt")
+	fi2, err2 := os.Open("buffer/userlist.txt")
     	if err2 != nil {
         	fmt.Printf("Error: %s\n", err2)
         	return
