@@ -209,8 +209,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					case Contains(message.Text,"黑人問號"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(url + "blackman.jpg", url + "blackman.jpg")).Do() 					
 //通訊code
-					case Contains(message.Text,"/w "):
-						conn = strings.Replace(message.Text, "/w ", "", 0)
+					case Contains(message.Text,"幫我連接"):
+						conn = strings.Replace(message.Text, "幫我連接", "", 0)
 						for e<=len(user_array){
 							var menu []string
 							menu = strings.Split(user_array[e], " & ")
