@@ -230,7 +230,7 @@ func Contains(s, substr string) bool {
 }
 
 func Update_Profile(u_array []string) {
-   	f, err := os.Create("/tmp/dat2")
+   	f, err := os.Create("/buffer/userlist.txt")
     	if err != nil {
         	fmt.Printf("Error: %s\n", err)
         	return
