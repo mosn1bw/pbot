@@ -31,6 +31,20 @@ func main() {
 	var err error
 	var conn string
 	
+	admin := "U83bb64e03c849e6ed897f9c556b0d4c1"
+	url := "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
+	
+	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
+	log.Println("Bot:", bot, " err:", err)
+	http.HandleFunc("/callback", callbackHandler)
+	port := os.Getenv("PORT")
+	addr := fmt.Sprintf(":%s", port)
+	http.ListenAndServe(addr, nil)
+}
+
+func callbackHandler(w http.ResponseWriter, r *http.Request) {
+	events, err := bot.ParseRequest(r)
+	
 	var list string
 	var price string
 	var stock string
@@ -38,9 +52,14 @@ func main() {
 	var uid string
 	var list_array []string
 	var user_array []string
-	
-	admin := "U83bb64e03c849e6ed897f9c556b0d4c1"
-	url := "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
+	if err != nil {
+		if err == linebot.ErrInvalidSignature {
+			w.WriteHeader(400)
+		} else {
+			w.WriteHeader(500)
+		}
+		return
+	}
 	
 	fi, err := os.Open("buffer/list.txt")
     	if err != nil {
@@ -74,26 +93,6 @@ func main() {
 		list = list + "@#@" + string(a)
     	}
 	user_array = strings.Split(list, "@#@")
-	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
-	log.Println("Bot:", bot, " err:", err)
-	http.HandleFunc("/callback", callbackHandler)
-	port := os.Getenv("PORT")
-	addr := fmt.Sprintf(":%s", port)
-	http.ListenAndServe(addr, nil)
-}
-
-func callbackHandler(w http.ResponseWriter, r *http.Request) {
-	events, err := bot.ParseRequest(r)
-	
-	if err != nil {
-		if err == linebot.ErrInvalidSignature {
-			w.WriteHeader(400)
-		} else {
-			w.WriteHeader(500)
-		}
-		return
-	}
-	
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			var cow string
