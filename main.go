@@ -155,9 +155,18 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 								case Contains(message.Text,"要買"):
 									if len(profile) > 0{
-										bot.PushMessage(admin,linebot.NewTextMessage(profile[2] + "要買菜")).Do() 
+										bot.PushMessage(admin,linebot.NewTextMessage(profile[2] + "要買" + food)).Do() 
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 	
 									}
+							}
+						}else{
+							if Contains(message.Text,"要買"){
+								if len(profile) > 0{
+									bot.PushMessage(admin,linebot.NewTextMessage(profile[2] + "要買菜")).Do() 
+									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買菜嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 	
+								}else{
+									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買菜嗎? 可是你好像還不是我們菜市場的會員捏，麻煩跟張耀東聯繫幫你加入菜市場會員，會員才有特別優惠喔!!")).Do() 	
+								}
 							}
 						}
 //石斑魚的code
