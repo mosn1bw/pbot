@@ -229,7 +229,7 @@ func Contains(s, substr string) bool {
      return Index(s, substr) != -1
 }
 
-func Update_Profile(u_array []string) void {
+func Update_Profile(u_array []string) {
    	f, err := os.Create("/tmp/dat2")
     	if err != nil {
         	fmt.Printf("Error: %s\n", err)
