@@ -235,7 +235,6 @@ func Update_Profile(u_array []string) {
         	fmt.Printf("Error: %s\n", err)
         	return
     	}
-    	defer f.Close()
 	
 	w := bufio.NewWriter(f)
 	w.WriteString("ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態\n")
@@ -252,6 +251,7 @@ func Update_Profile(u_array []string) {
 		e++
 	}
 	w.Flush()
+    	defer f.Close()
 }
 
 func Index(s string, sep string) int {
