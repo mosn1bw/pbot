@@ -124,33 +124,80 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					}
 					e++
 				}
-				switch {
-					case (conn!="")&((uid==admin)||(uid==conn)):
-						switch{
-							case uid==admin:
-								if message.Text=="/bye"{
-									conn = ""
-									bot.PushMessage(admin,linebot.NewTextMessage("已與"+profile[2]+"離線")).Do() 
-									bot.PushMessage(conn,linebot.NewTextMessage("跟老闆結束通話囉")).Do() 
-								}else{
-									bot.PushMessage(conn,linebot.NewTextMessage(message.Text)).Do() 
+				if (conn!="")&((uid==admin)||(uid==conn)){
+					switch{
+						case uid==admin:
+							if message.Text=="/bye"{
+								conn = ""
+								bot.PushMessage(admin,linebot.NewTextMessage("已與"+profile[2]+"離線")).Do() 
+								bot.PushMessage(conn,linebot.NewTextMessage("跟老闆結束通話囉")).Do() 
+							}else{
+								bot.PushMessage(conn,linebot.NewTextMessage(message.Text)).Do() 
+							}
+						case uid==conn:
+							bot.PushMessage(admin,linebot.NewTextMessage(profile[2] + "說：" + message.Text)).Do() 
+					}
+				}else
+				{
+					switch {
+						case Contains(message.Text,"幫我查ID"):
+							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
+	//賣菜的code
+						case Contains(message.Text,"菜")||Contains(message.Text,"葉"):						
+							food = ""
+							switch{
+								case Contains(message.Text,"高麗菜"):
+									food = "高麗菜"
+								case Contains(message.Text,"小白菜"):
+									food = "小白菜"
+
+							}
+							if food != ""{
+								i:=0
+								for i<=len(list_array){
+									var menu []string
+									menu = strings.Split(list_array[i], " ")
+									if menu[0] == food{
+										price=menu[1]
+										stock=menu[2]
+										break
+									}
+									i++
 								}
-							case uid==conn:
-								bot.PushMessage(admin,linebot.NewTextMessage(profile[2] + "說：" + message.Text)).Do() 
-						}
-//賣菜的code
-					case Contains(message.Text,"幫我查ID"):
-						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
-					case Contains(message.Text,"菜")||Contains(message.Text,"葉"):						
-						food = ""
-						switch{
-							case Contains(message.Text,"高麗菜"):
-								food = "高麗菜"
-							case Contains(message.Text,"小白菜"):
-								food = "小白菜"
-							
-						}
-						if food != ""{
+								switch{
+									case Contains(message.Text,"一斤多少")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
+										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
+									case Contains(message.Text,"要買"):
+										if len(profile) > 0{
+											bot.PushMessage(admin,linebot.NewTextMessage(profile[1] + profile[2] + "要買菜")).Do() 
+											bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do()
+										}
+								}
+							}else{
+								if Contains(message.Text,"要買"){
+									if len(profile) > 0{
+										bot.PushMessage(admin,linebot.NewTextMessage(profile[1] + profile[2] + "要買菜")).Do() 
+										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買菜嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 	
+									}else{
+										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買菜嗎? 可是你好像還不是我們菜市場的會員捏，麻煩跟張耀東聯繫幫你加入菜市場會員，會員才有特別優惠喔!!")).Do() 	
+									}
+								}
+							}
+	//石斑魚的code
+						case Contains(message.Text,"斑")||Contains(message.Text,"班"):
+							food = ""
+							switch{
+								case Contains(message.Text,"龍虎"):
+									food = "龍虎石斑"
+								case Contains(message.Text,"青"):
+									food = "青斑"
+								case Contains(message.Text,"珍珠"):
+									food = "珍珠石斑"
+								default:
+									if Contains(message.Text,"一斤多少")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算")||Contains(message.Text,"還有多少")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存")||Contains(message.Text,"還有幾"){
+										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("拍謝啦! 我是笨笨的電腦，不知道您要問哪種石斑捏，我們有龍虎石斑、青斑、還有珍珠石斑")).Do()
+									}
+							}
 							i:=0
 							for i<=len(list_array){
 								var menu []string
@@ -163,82 +210,37 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								i++
 							}
 							switch{
-								case Contains(message.Text,"一斤多少")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
+								case Contains(message.Text,"一斤多少")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):						
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
-								case Contains(message.Text,"要買"):
-									if len(profile) > 0{
-										bot.PushMessage(admin,linebot.NewTextMessage(profile[1] + profile[2] + "要買菜")).Do() 
-										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do()
-									}
+								case Contains(message.Text,"還有多少")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存")||Contains(message.Text,"還有幾"):
+									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "大概還有" + stock + "尾可以買，賣完就沒了喔!! 趕快來電088953096/0939220743黃先生")).Do() 
 							}
-						}else{
-							if Contains(message.Text,"要買"){
-								if len(profile) > 0{
-									bot.PushMessage(admin,linebot.NewTextMessage(profile[1] + profile[2] + "要買菜")).Do() 
-									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買菜嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 	
-								}else{
-									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買菜嗎? 可是你好像還不是我們菜市場的會員捏，麻煩跟張耀東聯繫幫你加入菜市場會員，會員才有特別優惠喔!!")).Do() 	
+	//以下是喇賽的code
+						case Contains(message.Text,"87"):
+							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("87分，不能再高惹")).Do() 
+						case Contains(message.Text,"母牛")||Contains(message.Text,"洗眼")||Contains(message.Text,"乳牛")||Contains(message.Text,"淨化"):
+							bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
+						case Contains(message.Text,"刀塔"):
+							bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(url + "6569950-1490833625.jpg", url + "6569950-1490833625.jpg")).Do() 
+						case Contains(message.Text,"黑人問號"):
+							bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(url + "blackman.jpg", url + "blackman.jpg")).Do() 					
+	//通訊code
+						case Contains(message.Text,"/w "):
+							conn = strings.Replace(message.Text, "/w ", "", -1)
+							for e<=len(user_array){
+								var menu []string
+								menu = strings.Split(user_array[e], " & ")
+								if menu[1] == conn{
+									profile = strings.Split(user_array[e], " & ")
+									conn = profile[0]
+									break
 								}
+								e++
 							}
-						}
-//石斑魚的code
-					case Contains(message.Text,"斑")||Contains(message.Text,"班"):
-						food = ""
-						switch{
-							case Contains(message.Text,"龍虎"):
-								food = "龍虎石斑"
-							case Contains(message.Text,"青"):
-								food = "青斑"
-							case Contains(message.Text,"珍珠"):
-								food = "珍珠石斑"
-							default:
-								if Contains(message.Text,"一斤多少")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算")||Contains(message.Text,"還有多少")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存")||Contains(message.Text,"還有幾"){
-									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("拍謝啦! 我是笨笨的電腦，不知道您要問哪種石斑捏，我們有龍虎石斑、青斑、還有珍珠石斑")).Do()
-								}
-						}
-						i:=0
-						for i<=len(list_array){
-							var menu []string
-							menu = strings.Split(list_array[i], " ")
-							if menu[0] == food{
-								price=menu[1]
-								stock=menu[2]
-								break
-							}
-							i++
-						}
-						switch{
-							case Contains(message.Text,"一斤多少")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):						
-								bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
-							case Contains(message.Text,"還有多少")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存")||Contains(message.Text,"還有幾"):
-								bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "大概還有" + stock + "尾可以買，賣完就沒了喔!! 趕快來電088953096/0939220743黃先生")).Do() 
-						}
-//以下是喇賽的code
-					case Contains(message.Text,"87"):
-						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("87分，不能再高惹")).Do() 
-					case Contains(message.Text,"母牛")||Contains(message.Text,"洗眼")||Contains(message.Text,"乳牛")||Contains(message.Text,"淨化"):
-						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
-					case Contains(message.Text,"刀塔"):
-						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(url + "6569950-1490833625.jpg", url + "6569950-1490833625.jpg")).Do() 
-					case Contains(message.Text,"黑人問號"):
-						bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(url + "blackman.jpg", url + "blackman.jpg")).Do() 					
-//通訊code
-					case Contains(message.Text,"/w "):
-						conn = strings.Replace(message.Text, "/w ", "", -1)
-						for e<=len(user_array){
-							var menu []string
-							menu = strings.Split(user_array[e], " & ")
-							if menu[1] == conn{
-								profile = strings.Split(user_array[e], " & ")
-								conn = profile[0]
-								break
-							}
-							e++
-						}
-						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("已成功與" + profile[2] + "連結，可以直接傳訊息開始通訊")).Do() 
-						bot.PushMessage(conn,linebot.NewTextMessage("老闆出現囉! 你現在可以跟他傳訊息了")).Do() 
+							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("已成功與" + profile[2] + "連結，可以直接傳訊息開始通訊")).Do() 
+							bot.PushMessage(conn,linebot.NewTextMessage("老闆出現囉! 你現在可以跟他傳訊息了")).Do() 
+					}
 				}
-				
 			}
 
 		}
