@@ -128,6 +128,15 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					switch{
 						case uid==admin:
 							if message.Text=="/bye"{
+								for e<=len(user_array)-1{
+									var menu []string
+									menu = strings.Split(user_array[e], " & ")
+									if menu[0] == conn{
+										profile = strings.Split(user_array[e], " & ")
+										break
+									}
+									e++
+								}
 								conn = ""
 								bot.PushMessage(admin,linebot.NewTextMessage("已與"+profile[2]+"離線")).Do() 
 								bot.PushMessage(conn,linebot.NewTextMessage("跟老闆結束通話囉")).Do() 
