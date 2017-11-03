@@ -229,7 +229,7 @@ func Contains(s, substr string) bool {
 }
 
 func Update_Profile(all_array []string,u_array []string) {
-   	f, err := os.OpenFile("buffer/userlist.txt", os.O_WRONLY|os.O_CREATE, 0666)
+   	f, err := os.OpenFile("buffer/userlist.txt", os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0666)
     	if err != nil {
         	fmt.Printf("Error: %s\n", err)
         	return
