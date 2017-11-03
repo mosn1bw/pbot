@@ -46,7 +46,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	var food string
 	var uid string
 	var list_array []string
-	var user_array []string
+	//var user_array []string
 	
 	admin := "U83bb64e03c849e6ed897f9c556b0d4c1"
 	url := "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
