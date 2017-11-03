@@ -246,10 +246,12 @@ func Update_Profile(u_array []string) {
 	for e<=len(u_array){
 		i:=0
 		for i<=6{
-			err := w.WriteString(u_array[i] + " & ")
+			n4, err := w.WriteString(u_array[i] + " & ")
+			fmt.Printf("wrote %d bytes\n", n4)
 			i++
 		}
-		err := w.WriteString("\n")
+		n4, err := w.WriteString("\n")
+		fmt.Printf("wrote %d bytes\n", n4)
 		e++
 	}
 	w.Flush()
