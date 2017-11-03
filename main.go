@@ -96,7 +96,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
     	}
 	
 	user_array = strings.Split(list, "@#@")
-	
+		
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			var cow string
@@ -105,27 +105,30 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				//抓user id
+				//抓user id跟資料
+				// 0 ID
+				// 1 客戶代號
+				// 2 姓名
+				// 3 生日
+				// 4 喜好
+				// 5 電話
+				// 6 通訊狀態
 				uid = event.Source.UserID
+				e:=0
+				var profile []string
+				for e<=len(user_array){
+					var menu []string
+					menu = strings.Split(user_array[e], " & ")
+					if menu[0] == uid{
+						profile = strings.Split(user_array[e], " & ")
+						break
+					}
+					e++
+				}
 				switch {
 //賣菜的code
 					case Contains(message.Text,"幫我查ID"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
-					case Contains(message.Text,"我的生日"):
-						i:=0
-						//var name string
-						var bday string
-						for i<=len(user_array){
-							var menu []string
-							menu = strings.Split(user_array[i], " & ")
-							if menu[0] == uid{
-								//name=menu[2]
-								bday=menu[3]
-								break
-							}
-							i++
-						}
-						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(bday)).Do() 
 					case Contains(message.Text,"菜")||Contains(message.Text,"葉"):						
 						food = ""
 						switch{
@@ -151,8 +154,10 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								case Contains(message.Text,"一斤多少")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 								case Contains(message.Text,"要買"):
-									bot.PushMessage(admin,linebot.NewTextMessage("有人要買菜")).Do() 
-									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 
+									if len(profile) > 0{
+										bot.PushMessage(admin,linebot.NewTextMessage(profile[2] + "要買菜")).Do() 
+										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 	
+									}
 							}
 						}
 //石斑魚的code
