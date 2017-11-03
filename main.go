@@ -30,6 +30,8 @@ var bot *linebot.Client
 func main() {
 	var err error
 	var conn string
+	var admin string
+	var url string
 	
 	admin := "U83bb64e03c849e6ed897f9c556b0d4c1"
 	url := "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
