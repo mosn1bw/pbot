@@ -230,13 +230,13 @@ func Contains(s, substr string) bool {
 }
 
 func Update_Profile(all_array []string,u_array []string) {
-   	f, err := os.OpenFile("/buffer/userlist.txt", os.O_WRONLY|os.O_CREATE, 0666)
+   	f, err := os.OpenFile("buffer/userlist.txt", os.O_WRONLY|os.O_CREATE, 0666)
     	if err != nil {
         	fmt.Printf("Error: %s\n", err)
         	return
     	}
     	defer f.Close()
-	ioutil.WriteFile("/buffer/userlist.txt", []byte("Hi\n"), 0666)
+		f.WriteString("ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態 & \n")
 	bot.PushMessage("U83bb64e03c849e6ed897f9c556b0d4c1",linebot.NewTextMessage(u_array[2] + "要買菜")).Do() 
 	e:=0
 	for e<=len(all_array){
