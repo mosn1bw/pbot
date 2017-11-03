@@ -157,6 +157,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									if len(profile) > 0{										
 										profile[6] = "1"
 										Update_Profile(user_array,profile)
+										bot.PushMessage(admin,linebot.NewTextMessage(u_array[2] + "要買菜")).Do() 
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do()
 									}
 							}
@@ -236,7 +237,6 @@ func Update_Profile(all_array []string,u_array []string) {
     	}
     	defer f.Close()
 	buffer := "ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態 & \n"
-	bot.PushMessage("U83bb64e03c849e6ed897f9c556b0d4c1",linebot.NewTextMessage(u_array[2] + "要買菜")).Do() 
 	e:=0
 	for e<=len(all_array){
 		var temp []string
