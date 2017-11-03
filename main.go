@@ -221,7 +221,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							}
 							e++
 						}
-						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("已成功與" + profile[2] + "連結，可以直接傳訊息開始通訊")).Do() 
+						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(conn + "已成功與" + profile[2] + "連結，可以直接傳訊息開始通訊")).Do() 
 				}
 				
 			}
