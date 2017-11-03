@@ -124,7 +124,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					}
 					e++
 				}
-				if (conn!="")&((uid==admin)||(uid==conn)){
+				if ((conn!="")&&((uid==admin)||(uid==conn))){
 					switch{
 						case uid==admin:
 							if message.Text=="/bye"{
