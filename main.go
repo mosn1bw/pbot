@@ -155,8 +155,23 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 								case Contains(message.Text,"要買"):
 									if len(profile) > 0{										
-										profile[6] = "1"
-										Update_Profile(user_array,profile)
+										profile[6] = "1"    
+										file, err := os.OpenFile(
+											"buffer/userlist.txt",
+											os.O_WRONLY|os.O_TRUNC|os.O_CREATE,
+											0666,
+										)
+										if err != nil {
+											log.Fatal(err)
+										}
+										defer file.Close()
+										// 写字节到文件中
+										byteSlice := []byte("Bytes!\n")
+										bytesWritten, err := file.Write(byteSlice)
+										if err != nil {
+											log.Fatal(err)
+										}
+										log.Printf("Wrote %d bytes.\n", bytesWritten)
 										bot.PushMessage(admin,linebot.NewTextMessage(uid + "要買菜")).Do() 
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do()
 									}
@@ -229,36 +244,6 @@ func Contains(s, substr string) bool {
      return Index(s, substr) != -1
 }
 
-func Update_Profile(all_array []string,u_array []string) {
-   	f, err := os.OpenFile("buffer/userlist.txt", os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0666)
-    	if err != nil {
-        	fmt.Printf("Error: %s\n", err)
-        	return
-    	}
-    	defer f.Close()
-	buffer := "ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態 & \n"
-	e:=0
-	for e<=len(all_array){
-		var temp []string
-		temp = strings.Split(all_array[e], " & ")
-		if temp[0] == u_array[0]{
-			i:=0
-			all_array[e] = "";
-			for i<=6{
-				all_array[e] = all_array[e] + u_array[i] + " & "
-				i++
-			}
-		}
-		buffer = buffer + all_array[e] + "\n"
-		e++
-	}
-	byteSlice := []byte(buffer+"\n")
-	bytesWritten, err := f.Write(byteSlice)
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Printf("Wrote %d bytes.\n", bytesWritten)
-}
 
 func Index(s string, sep string) int {
     n := len(sep)
