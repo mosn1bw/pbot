@@ -230,28 +230,27 @@ func Contains(s, substr string) bool {
 }
 
 func Update_Profile(u_array []string) {
-   	f, err := os.OpenFile("/buffer/userlist.txt", os.O_WRONLY|os.O_CREATE, 0666)
+   	f, err := os.OpenFile("/buffer/userlist.txt", os.O_CREATE|os.O_WRONLY, 0)
     	if err != nil {
         	fmt.Printf("Error: %s\n", err)
         	return
     	}
     	defer f.Close()
+	f.WriteString("ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態\n")
 	
-	w := bufio.NewWriter(f)
-	w.WriteString("ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態\n")
 	//使用 Flush 来确保所有缓存的操作已写入底层写入器。
 
 	e:=0
 	for e<=len(u_array){
 		i:=0
 		for i<=6{
-			w.WriteString(u_array[i] + " & ")
+			f.WriteString(u_array[i] + " & ")
 			i++
 		}
-		w.WriteString("\n")
+		f.WriteString("\n")
 		e++
 	}
-	w.Flush()
+	f.Flush()
 }
 
 func Index(s string, sep string) int {
