@@ -238,7 +238,7 @@ func Update_Profile(u_array []string) {
     	defer f.Close()
 	
 	w := bufio.NewWriter(f)
-	nw.WriteString("ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態\n")
+	w.WriteString("ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態\n")
 	//使用 Flush 来确保所有缓存的操作已写入底层写入器。
 
 	e:=0
