@@ -157,7 +157,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									if len(profile) > 0{
 										bot.PushMessage(admin,linebot.NewTextMessage(profile[2] + "要買" + food)).Do() 
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 	
-										profile[6] = 1
+										profile[6] = "1"
 										Update_Profile(profile)
 									}
 							}
@@ -235,7 +235,7 @@ func Update_Profile(u_array []string) {
         	fmt.Printf("Error: %s\n", err)
         	return
     	}
-    	defer fi.Close()
+    	defer f.Close()
 	
 	w := bufio.NewWriter(f)
 	n4, err := w.WriteString("ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態\n")
