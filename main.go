@@ -39,7 +39,18 @@ func main() {
 
 func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	events, err := bot.ParseRequest(r)
-
+	
+	var list string
+	var price string
+	var stock string
+	var food string
+	var uid string
+	var list_array []string
+	var user_array []string
+	
+	admin := "U83bb64e03c849e6ed897f9c556b0d4c1"
+	url := "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
+	
 	if err != nil {
 		if err == linebot.ErrInvalidSignature {
 			w.WriteHeader(400)
@@ -57,15 +68,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
     	defer fi.Close()
 
     	br := bufio.NewReader(fi)
-	var list string
-	var price string
-	var stock string
-	var food string
-	var uid string
-	
-	admin := "U83bb64e03c849e6ed897f9c556b0d4c1"
-	
-	url := "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
     	for {
         	a, _, c := br.ReadLine()
         	if c == io.EOF {
@@ -74,8 +76,27 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		list = list + "&" + string(a)
     	}
 	
-	var list_array []string
 	list_array = strings.Split(list, "&")
+	
+	fi2, err2 := os.Open("buffer/list.txt")
+    	if err2 != nil {
+        	fmt.Printf("Error: %s\n", err2)
+        	return
+    	}
+    	defer fi2.Close()
+	
+	list = ""
+    	br2 := bufio2.NewReader(fi)
+    	for {
+        	a, _, c := br2.ReadLine()
+        	if c == io.EOF {
+            	break
+        	}
+		list = list + "&" + string(a)
+    	}
+	
+	user_array = strings.Split(list, " & ")
+	
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			var cow string
