@@ -86,7 +86,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
     	defer fi2.Close()
 	
 	list = ""
-    	br2 := bufio2.NewReader(fi)
+    	br2 := bufio.NewReader(fi2)
     	for {
         	a, _, c := br2.ReadLine()
         	if c == io.EOF {
