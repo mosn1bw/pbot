@@ -238,20 +238,17 @@ func Update_Profile(u_array []string) {
     	defer f.Close()
 	
 	w := bufio.NewWriter(f)
-	n4, err := w.WriteString("ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態\n")
-	fmt.Printf("wrote %d bytes\n", n4)
+	nw.WriteString("ID & 客戶代號 & 姓名 & 生日 & 喜好 & 電話 & 通訊狀態\n")
 	//使用 Flush 来确保所有缓存的操作已写入底层写入器。
 
 	e:=0
 	for e<=len(u_array){
 		i:=0
 		for i<=6{
-			n4, err := w.WriteString(u_array[i] + " & ")
-			fmt.Printf("wrote %d bytes\n", n4)
+			w.WriteString(u_array[i] + " & ")
 			i++
 		}
-		n4, err := w.WriteString("\n")
-		fmt.Printf("wrote %d bytes\n", n4)
+		w.WriteString("\n")
 		e++
 	}
 	w.Flush()
