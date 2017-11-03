@@ -253,7 +253,7 @@ func Update_Profile(all_array []string,u_array []string) {
 		e++
 	}
 	byteSlice := []byte(buffer+"\n")
-	bytesWritten, err := file.Write(byteSlice)
+	bytesWritten, err := f.Write(byteSlice)
 	if err != nil {
 		log.Fatal(err)
 	}
