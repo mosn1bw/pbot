@@ -161,8 +161,10 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 											log.Fatal(err)
 										}
 										defer file.Close()
-    										file.WriteString("test")
-										file.Sync()
+										w := bufio.NewWriter(file)  //创建新的 Writer 对象
+										n4, err3 := w.WriteString("bufferedn")
+										fmt.Printf("写入 %d 个字节n", n4)
+										w.Flush()
 										file.Close()
 										bot.PushMessage(admin,linebot.NewTextMessage(uid + "要買菜")).Do() 
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do()
