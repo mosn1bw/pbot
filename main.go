@@ -95,7 +95,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		list = list + "@@" + string(a)
     	}
 	
-	user_array = strings.Split(list, "@@")
+	//user_array = strings.Split(list, "@@")
 	
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
