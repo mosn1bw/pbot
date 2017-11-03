@@ -165,8 +165,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 											log.Fatal(err)
 										}
 										defer file.Close()
-										// 写字节到文件中
-										byteSlice := []byte("Bytes!\n")
     										file.WriteString("test")
 										bot.PushMessage(admin,linebot.NewTextMessage(uid + "要買菜")).Do() 
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do()
