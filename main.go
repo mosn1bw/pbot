@@ -21,6 +21,7 @@ import (
 	"os"
 	"strings"
 	"math/rand"
+    	"io/ioutil"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
