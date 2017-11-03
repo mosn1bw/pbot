@@ -35,6 +35,7 @@ func main() {
 	
 	admin = "U83bb64e03c849e6ed897f9c556b0d4c1"
 	url = "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
+	conn = ""
 	
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
 	log.Println("Bot:", bot, " err:", err)
@@ -124,6 +125,11 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					e++
 				}
 				switch {
+					case (message.Text=="bye")&&(uid==admin):
+						conn = ""
+						bot.PushMessage(admin,linebot.NewTextMessage("已與"+profile[2]+"離線")).Do() 
+					case conn!="":
+						bot.PushMessage(admin,linebot.NewTextMessage(conn)).Do() 
 //賣菜的code
 					case Contains(message.Text,"幫我查ID"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
@@ -221,7 +227,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							}
 							e++
 						}
-						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(conn + "已成功與" + profile[2] + "連結，可以直接傳訊息開始通訊")).Do() 
+						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("已成功與" + profile[2] + "連結，可以直接傳訊息開始通訊")).Do() 
 				}
 				
 			}
