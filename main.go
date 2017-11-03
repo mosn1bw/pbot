@@ -221,8 +221,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								i++
 							}
 							switch{
-								case Contains(message.Text,"怎麼算是"):
-									
 								case Contains(message.Text,"一斤多少")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 								case Contains(message.Text,"還有多少")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存")||Contains(message.Text,"還有幾"):
