@@ -46,7 +46,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	var food string
 	var uid string
 	var list_array []string
-	//var user_array []string
+	var user_array []string
 	
 	admin := "U83bb64e03c849e6ed897f9c556b0d4c1"
 	url := "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
@@ -92,10 +92,10 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
         	if c == io.EOF {
             	break
         	}
-		list = list + "@@" + string(a)
+		list = list + "@#@" + string(a)
     	}
 	
-	//user_array = strings.Split(list, "@@")
+	user_array = strings.Split(list, "@#@")
 	
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
@@ -112,7 +112,20 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					case Contains(message.Text,"幫我查ID"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
 					case Contains(message.Text,"我的生日"):
-						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(list)).Do() 
+						i:=0
+						//var name string
+						var bday string
+						for i<=len(user_array){
+							var menu []string
+							menu = strings.Split(user_array[i], " & ")
+							if menu[0] == uid{
+								//name=menu[2]
+								bday=menu[3]
+								break
+							}
+							i++
+						}
+						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(bday)).Do() 
 					case Contains(message.Text,"菜")||Contains(message.Text,"葉"):						
 						food = ""
 						switch{
