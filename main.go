@@ -157,7 +157,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									if len(profile) > 0{										
 										profile[6] = "1"
 										Update_Profile(user_array,profile)
-										bot.PushMessage(admin,linebot.NewTextMessage(u_array[2] + "要買菜")).Do() 
+										bot.PushMessage(admin,linebot.NewTextMessage(uid + "要買菜")).Do() 
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do()
 									}
 							}
