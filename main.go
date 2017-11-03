@@ -112,20 +112,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					case Contains(message.Text,"幫我查ID"):
 						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
 					case Contains(message.Text,"我的生日"):
-						i:=0
-						//var name string
-						var bday string
-						for i<=len(user_array){
-							var menu []string
-							menu = strings.Split(user_array[i], " & ")
-							if menu[0] == uid{
-								//name=menu[2]
-								bday=menu[3]
-								break
-							}
-							i++
-						}
-						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(bday)).Do() 
+						bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(list)).Do() 
 					case Contains(message.Text,"菜")||Contains(message.Text,"葉"):						
 						food = ""
 						switch{
