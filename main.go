@@ -162,8 +162,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 										}
 										defer file.Close()
 										w := bufio.NewWriter(file)  //创建新的 Writer 对象
-										n4 := w.WriteString("bufferedn")
-										fmt.Printf("写入 %d 个字节n", n4)
+										w.WriteString("bufferedn")
 										w.Flush()
 										file.Close()
 										bot.PushMessage(admin,linebot.NewTextMessage(uid + "要買菜")).Do() 
