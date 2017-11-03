@@ -156,11 +156,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								case Contains(message.Text,"要買"):
 									if len(profile) > 0{										
 										profile[6] = "1"    
-										file, err := os.OpenFile(
-											"buffer/userlist.txt",
-											os.O_WRONLY|os.O_TRUNC|os.O_CREATE,
-											0666,
-										)
+										file, err := os.Create("buffer/userlist.txt")
 										if err != nil {
 											log.Fatal(err)
 										}
