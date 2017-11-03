@@ -253,10 +253,11 @@ func Update_Profile(all_array []string,u_array []string) {
 		e++
 	}
 	byteSlice := []byte(buffer+"\n")
-	err := f.Write(byteSlice)
+	bytesWritten, err := file.Write(byteSlice)
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Printf("Wrote %d bytes.\n", bytesWritten)
 }
 
 func Index(s string, sep string) int {
