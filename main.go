@@ -34,15 +34,6 @@ func main() {
 	admin := "U83bb64e03c849e6ed897f9c556b0d4c1"
 	url := "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
 	
-	if err != nil {
-		if err == linebot.ErrInvalidSignature {
-			w.WriteHeader(400)
-		} else {
-			w.WriteHeader(500)
-		}
-		return
-	}
-
 	fi, err := os.Open("buffer/list.txt")
     	if err != nil {
         	fmt.Printf("Error: %s\n", err)
@@ -90,6 +81,15 @@ func main() {
 func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	events, err := bot.ParseRequest(r)
 	
+	if err != nil {
+		if err == linebot.ErrInvalidSignature {
+			w.WriteHeader(400)
+		} else {
+			w.WriteHeader(500)
+		}
+		return
+	}
+
 	var list string
 	var price string
 	var stock string
