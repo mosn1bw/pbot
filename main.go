@@ -155,8 +155,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								case Contains(message.Text,"一斤多少")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 								case Contains(message.Text,"要買"):
-									if len(profile) > 0{
-										bot.PushMessage(admin,linebot.NewTextMessage(profile[2] + "要買" + food)).Do() 
+									if len(profile) > 0{										
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 	
 										profile[6] = "1"
 										Update_Profile(user_array,profile)
@@ -238,7 +237,7 @@ func Update_Profile(all_array []string,u_array []string) {
     	}
     	defer f.Close()
 	ioutil.WriteFile("/buffer/userlist.txt", []byte("Hi\n"), 0666)
-	
+	bot.PushMessage(admin,linebot.NewTextMessage(u_array[2] + "要買菜")).Do() 
 	e:=0
 	for e<=len(all_array){
 		var temp []string
