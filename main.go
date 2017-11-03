@@ -124,7 +124,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					}
 					e++
 				}
-				/**if ((conn!="")&&((uid==admin)||(uid==conn))){
+				if ((conn!="")&&((uid==admin)||(uid==conn))){
 					switch{
 						case uid==admin:
 							if message.Text=="/bye"{
@@ -132,13 +132,13 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								bot.PushMessage(admin,linebot.NewTextMessage("已與"+profile[2]+"離線")).Do() 
 								bot.PushMessage(conn,linebot.NewTextMessage("跟老闆結束通話囉")).Do() 
 							}else{
-				//				bot.PushMessage(conn,linebot.NewTextMessage(message.Text)).Do() 
-				//			}
-				//		case uid==conn:
-				//			bot.PushMessage(admin,linebot.NewTextMessage(profile[2] + "說：" + message.Text)).Do() 
-				//	}
-				//}else
-				{**/
+								bot.PushMessage(conn,linebot.NewTextMessage(message.Text)).Do() 
+							}
+						case uid==conn:
+							bot.PushMessage(admin,linebot.NewTextMessage(profile[2] + "說：" + message.Text)).Do() 
+					}
+				}else
+				{
 					switch {
 						case Contains(message.Text,"幫我查ID"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
@@ -239,7 +239,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							}
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("已成功與" + profile[2] + "連結，可以直接傳訊息開始通訊")).Do() 
 							bot.PushMessage(conn,linebot.NewTextMessage("老闆出現囉! 你現在可以跟他傳訊息了")).Do() 
-					//}
+					}
 				}
 			}
 
