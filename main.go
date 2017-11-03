@@ -31,6 +31,14 @@ func main() {
 	var err error
 	var conn string
 	
+	var list string
+	var price string
+	var stock string
+	var food string
+	var uid string
+	var list_array []string
+	var user_array []string
+	
 	admin := "U83bb64e03c849e6ed897f9c556b0d4c1"
 	url := "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
 	
@@ -49,16 +57,13 @@ func main() {
         	}
 		list = list + "&" + string(a)
     	}
-	
 	list_array = strings.Split(list, "&")
-	
 	fi2, err2 := os.Open("buffer/userlist.txt")
     	if err2 != nil {
         	fmt.Printf("Error: %s\n", err2)
         	return
     	}
     	defer fi2.Close()
-	
 	list = ""
     	br2 := bufio.NewReader(fi2)
     	for {
@@ -68,7 +73,6 @@ func main() {
         	}
 		list = list + "@#@" + string(a)
     	}
-	
 	user_array = strings.Split(list, "@#@")
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
 	log.Println("Bot:", bot, " err:", err)
@@ -89,14 +93,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-
-	var list string
-	var price string
-	var stock string
-	var food string
-	var uid string
-	var list_array []string
-	var user_array []string
 	
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
