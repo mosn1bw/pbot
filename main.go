@@ -100,7 +100,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			var cow string
 			r := rand.New(rand.NewSource(time.Now().UnixNano()))
-			cow = url + "cow/" + fmt.Sprintf("%d", r.Intn(10))  + ".jpg"
+			cow = url + "cow/" + fmt.Sprintf("%d", r.Intn(11))  + ".jpg"
 
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
