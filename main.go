@@ -149,7 +149,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				}else
 				{
 					switch {
-						case Contains(message.Text,"幫我查ID"):
+						case Contains(message.Text,"幫我查ID")||Contains(message.Text,"幫我查id"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
 	//賣菜的code
 						case Contains(message.Text,"菜")||Contains(message.Text,"葉"):						
