@@ -158,7 +158,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						case Contains(message.Text,"幫我查ID")||Contains(message.Text,"幫我查id"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
 						case Contains(message.Text,"幹你娘"):
-							bot.PushMessage(event.ReplyToken, TestPushMessages()).Do() 
+							bot.PushMessage(event.ReplyToken, linebot.TestPushMessages()).Do() 
 						case ppljoin != "":
 							join_msg = ppljoin + " " + message.Text
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text + "嗎? 好的，那請問您的生日是幾月幾號呢?")).Do() 
