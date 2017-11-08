@@ -166,7 +166,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									linebot.NewURITemplateAction("我要幹死他!!", "http://www.5278.mobi/ipz-891-%E3%82%8F%E3%81%9F%E3%81%97%E3%80%81%E7%8A%AF%E3%81%95%E3%82%8C%E9%81%8E%E3%81%8E%E3%81%A6-%E5%A5%B3%E5%AD%90%E6%A0%A1%E7%94%9F%E5%87%8C%E8%BE%B1%E8%A8%98-%E6%B1%9A%E3%81%95.html"),
 								),
 								linebot.NewCarouselColumn(
-									"https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/n_1334prbyb035pl.jpg", "								linebot.NewCarouselColumn(
 									"https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/n_1334prbyb035pl.jpg", "白石茉莉奈", "PRBYB-035  nude romantic～ひと夏の恋愛逃避行～",
 									linebot.NewURITemplateAction("我要幹死他!!", "http://www.5278.mobi/prbyb-035-nude-romantic%E3%80%9C%E3%81%B2%E3%81%A8%E5%A4%8F%E3%81%AE%E6%81%8B%E6%84%9B%E9%80%83%E9%81%BF%E8%A1%8C%E3%80%9C%E7%99%BD%E7%9F%B3%E8%8C%89%E8%8E%89%E5%A5%88.html"),
 								),
