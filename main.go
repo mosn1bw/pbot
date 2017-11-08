@@ -61,7 +61,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	var uid string
 	var list_array []string
 	var user_array []string
-	var av_array []string
+	//var av_array []string
 	if err != nil {
 		if err == linebot.ErrInvalidSignature {
 			w.WriteHeader(400)
@@ -103,6 +103,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		list = list + "@#@" + string(a)
     	}
 	user_array = strings.Split(list, "@#@")
+	
+	/***
 	fi3, err3 := os.Open("buffer/LoveLove.txt")
     	if err3 != nil {
         	fmt.Printf("Error: %s\n", err3)
@@ -119,6 +121,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		list = list + "@#@" + string(a)
     	}
 	av_array = strings.Split(list, "@#@")
+	***/
+	
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			var cow string
