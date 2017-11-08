@@ -169,6 +169,10 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									"https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/n_1334prbyb035pl.jpg", "白石茉莉奈", "PRBYB-035  nude romantic～ひと夏の恋愛逃避行～",
 									linebot.NewURITemplateAction("我要幹死他!!", "http://www.5278.mobi/prbyb-035-nude-romantic%E3%80%9C%E3%81%B2%E3%81%A8%E5%A4%8F%E3%81%AE%E6%81%8B%E6%84%9B%E9%80%83%E9%81%BF%E8%A1%8C%E3%80%9C%E7%99%BD%E7%9F%B3%E8%8C%89%E8%8E%89%E5%A5%88.html"),
 								),
+								linebot.NewCarouselColumn(
+									"https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/SNIS-986.jpg", "三上悠亞", "SNIS-986 國民的アイドル アドレナリン大爆発！禁欲1ヶ月後の性欲剝き出し焦らされトランスFUCK",
+									linebot.NewURITemplateAction("我要幹死他!!", "https://drive.google.com/open?id=17eF6_X9yDxTNsyiXYLMHKlMgOU4O8yOz"),
+								),
 							)
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
