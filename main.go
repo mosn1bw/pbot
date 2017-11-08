@@ -178,9 +178,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
 						case Contains(message.Text,"尻槍"):
 							e:=0
-							rnd1:=fmt.Sprintf("%d", r.Intn(3))
-							rnd2:=fmt.Sprintf("%d", r.Intn(3))
-							rnd3:=fmt.Sprintf("%d", r.Intn(3))
+							rnd1:=r.Intn(3)
+							rnd2:=r.Intn(3)
+							rnd3:=r.Intn(3)
 							var av1 []string
 							av1 = strings.Split(av_array[rnd1], "@@")
 							var av2 []string
