@@ -173,7 +173,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									linebot.NewMessageTemplateAction("Say message", "Rice=米"),
 								),
 							)
-						
+							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
+							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
 						case Contains(message.Text,"幫我查ID")||Contains(message.Text,"幫我查id"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
 						case Contains(message.Text,"幫我查群組ID")||Contains(message.Text,"幫我查群組id"):
