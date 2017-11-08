@@ -151,6 +151,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					switch {
 						case Contains(message.Text,"幫我查ID")||Contains(message.Text,"幫我查id"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
+						case message.Text=="我要加入":
+							bot.PushMessage(admin,linebot.NewTextMessage(uid)).Do() 
 	//賣菜的code
 						case Contains(message.Text,"菜")||Contains(message.Text,"葉"):						
 							food = ""
