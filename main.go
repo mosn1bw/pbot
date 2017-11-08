@@ -158,7 +158,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						case Contains(message.Text,"幫我查ID")||Contains(message.Text,"幫我查id"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
 						case Contains(message.Text,"幹你娘"):
-							bot.ReplyMessage(event.ReplyToken, linebot.NewConfirmTemplate(
+							bot.PushMessage(admin, linebot.NewConfirmTemplate(
 													"你確定你要幹你娘?",
 													NewMessageTemplateAction("Yes", "yes"),
 													NewMessageTemplateAction("No", "no"),)).Do() 
