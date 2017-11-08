@@ -61,6 +61,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	var uid string
 	var list_array []string
 	var user_array []string
+	var av_array []string
 	if err != nil {
 		if err == linebot.ErrInvalidSignature {
 			w.WriteHeader(400)
@@ -102,6 +103,22 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		list = list + "@#@" + string(a)
     	}
 	user_array = strings.Split(list, "@#@")
+	fi3, err3 := os.Open("buffer/LoveLove.txt")
+    	if err3 != nil {
+        	fmt.Printf("Error: %s\n", err3)
+        	return
+    	}
+    	defer fi3.Close()
+	list = ""
+    	br3 := bufio.NewReader(fi3)
+    	for {
+        	a, _, c := br3.ReadLine()
+        	if c == io.EOF {
+            	break
+        	}
+		list = list + "@#@" + string(a)
+    	}
+	av_array = strings.Split(list, "@#@")
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			var cow string
@@ -160,18 +177,29 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
 						case Contains(message.Text,"尻槍"):
+							e:=0
+							rnd1:=fmt.Sprintf("%d", r.Intn(3))
+							rnd2:=fmt.Sprintf("%d", r.Intn(3))
+							rnd3:=fmt.Sprintf("%d", r.Intn(3))
+							var av1 []string
+							av1 = strings.Split(av_array[rnd1], "@@")
+							var av2 []string
+							av2 = strings.Split(av_array[rnd2], "@@")
+							var av3 []string
+							av3 = strings.Split(av_array[rnd3], "@@")
+						
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
-									"https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/LoveLove/ipz891pl.jpg", "相沢みなみ", "IPZ-891 わたし、犯され過ぎて… 女子校生凌辱記 汚され続ける学級委員長 ",
-									linebot.NewURITemplateAction("我要幹死他!!", "http://www.5278.mobi/ipz-891-%E3%82%8F%E3%81%9F%E3%81%97%E3%80%81%E7%8A%AF%E3%81%95%E3%82%8C%E9%81%8E%E3%81%8E%E3%81%A6-%E5%A5%B3%E5%AD%90%E6%A0%A1%E7%94%9F%E5%87%8C%E8%BE%B1%E8%A8%98-%E6%B1%9A%E3%81%95.html"),
+									url+"/LoveLove/" + av1[1], av1[2], av1[3],
+									linebot.NewURITemplateAction("我要幹死他!!", av1[4]),
 								),
 								linebot.NewCarouselColumn(
-									"https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/LoveLove/n_1334prbyb035pl.jpg", "白石茉莉奈", "PRBYB-035  nude romantic～ひと夏の恋愛逃避行～",
-									linebot.NewURITemplateAction("我要幹死他!!", "http://61.216.39.201:32767/portal/apis/fileExplorer/share_link.cgi?link=oGbfovgIA4rW6V/QvLAr50"),
+									url+"/LoveLove/" + av2[1], av2[2], av2[3],
+									linebot.NewURITemplateAction("我要幹死他!!", av2[4]),
 								),
 								linebot.NewCarouselColumn(
-									"https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/LoveLove/SNIS-986.jpg", "三上悠亞", "SNIS-986 國民的アイドル アドレナリン大爆発！禁欲1ヶ月後の性欲剝き出し焦らされトランスFUCK",
-									linebot.NewURITemplateAction("我要幹死他!!", "https://drive.google.com/open?id=17eF6_X9yDxTNsyiXYLMHKlMgOU4O8yOz"),
+									url+"/LoveLove/" + av3[1], av3[2], av3[3],
+									linebot.NewURITemplateAction("我要幹死他!!", av3[4]),
 								),
 							)
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
