@@ -172,8 +172,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							if len(profile) > 0{
 								bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(profile[2] + "你已經是菜市場的會員囉，不用再申請加入啦")).Do()
 							}else{
-							ppljoin = uid
-							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要加入Protoss菜市場嗎? 請問您叫什麼名字呢?")).Do() 
+								ppljoin = uid
+								bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要加入Protoss菜市場嗎? 請問您叫什麼名字呢?")).Do() 
 							}
 	//賣菜的code
 						case Contains(message.Text,"菜")||Contains(message.Text,"葉"):						
