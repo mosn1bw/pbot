@@ -157,6 +157,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					switch {
 						case Contains(message.Text,"幹你娘"):
 							template := linebot.NewConfirmTemplate("你真的要幹我娘嗎?", linebot.NewMessageTemplateAction("Yes", "yes"),linebot.NewMessageTemplateAction("No", "no"))
+							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 						case Contains(message.Text,"幫我查ID")||Contains(message.Text,"幫我查id"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
 						case ppljoin != "":
