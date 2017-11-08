@@ -167,7 +167,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								),
 								linebot.NewCarouselColumn(
 									"https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/n_1334prbyb035pl.jpg", "白石茉莉奈", "PRBYB-035  nude romantic～ひと夏の恋愛逃避行～",
-									linebot.NewURITemplateAction("我要幹死他!!", "http://jinti-cloud.myasustor.com:32767/portal/apis/fileExplorer/share_link.cgi?link=oGbfovgIA4rW6V/QvLAr50"),
+									linebot.NewURITemplateAction("我要幹死他!!", "http://61.216.39.201:32767/portal/apis/fileExplorer/share_link.cgi?link=oGbfovgIA4rW6V/QvLAr50"),
 								),
 								linebot.NewCarouselColumn(
 									"https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/SNIS-986.jpg", "三上悠亞", "SNIS-986 國民的アイドル アドレナリン大爆発！禁欲1ヶ月後の性欲剝き出し焦らされトランスFUCK",
@@ -175,7 +175,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								),
 							)
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
-							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
+							bot.PushMessage(profile[0],messgage).Do() 
 						case Contains(message.Text,"菜單"):
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
