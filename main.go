@@ -246,7 +246,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(url + "6569950-1490833625.jpg", url + "6569950-1490833625.jpg")).Do() 
 						case Contains(message.Text,"黑人問號"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(url + "blackman.jpg", url + "blackman.jpg")).Do() 					
-	//通訊code
+	//指令集
+						case (uid==admin)||Contains(message.Text,"/join "):
+							bot.PushMessage(strings.Replace(message.Text, "/join ", "", -1),linebot.NewTextMessage(profile[2] + "你好，已經幫你加入菜市場會員了，你現在可以開始買菜囉!!")).Do() 
 						case Contains(message.Text,"/w "):
 							conn = strings.Replace(message.Text, "/w ", "", -1)
 							for e<=len(user_array){
