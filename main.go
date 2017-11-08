@@ -205,6 +205,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									food = "高麗菜"
 								case Contains(message.Text,"小白菜"):
 									food = "小白菜"
+								case Contains(message.Text,"花椰菜"):
+									food = "花椰菜"
 								case Contains(message.Text,"地瓜葉"):
 									food = "地瓜葉"
 
