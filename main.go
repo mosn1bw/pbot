@@ -160,17 +160,17 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
 						
-						case Contains(message.Text,"操你媽"):
+						case Contains(message.Text,"菜單"):
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
-									cow, "hoge", "fuga",
-									linebot.NewURITemplateAction("Go to line.me", "https://line.me"),
-									linebot.NewPostbackTemplateAction("Say hello1", "hello こんにちは", ""),
+									"https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/vegetable/gau.jpg", "高麗菜", "起源韓國，中國製造",
+									linebot.NewMessageTemplateAction("老闆這個多少錢?", "請問高麗菜一斤多少?"),
+									linebot.NewMessageTemplateAction("我要買這個!!", "我要買高麗菜"),
 								),
 								linebot.NewCarouselColumn(
-									cow, "hoge", "fuga",
-									linebot.NewPostbackTemplateAction("言 hello2", "hello こんにちは", "hello こんにちは"),
-									linebot.NewMessageTemplateAction("Say message", "Rice=米"),
+									"https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/vegetable/hua.jpg", "花椰菜", "上面有蟲的部分最好吃",
+									linebot.NewMessageTemplateAction("老闆這個多少錢?", "請問花椰菜一斤多少?"),
+									linebot.NewMessageTemplateAction("我要買這個!!", "我要買花椰菜"),
 								),
 							)
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
