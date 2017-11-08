@@ -169,8 +169,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							b_day = ""
 							join_msg = ""
 						case message.Text=="我要加入":
+							if len(profile) > 0{
+								bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(profile[2] + "你已經是菜市場的會員囉，不用再申請加入啦")).Do()
+							}else{
 							ppljoin = uid
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要加入Protoss菜市場嗎? 請問您叫什麼名字呢?")).Do() 
+							}
 	//賣菜的code
 						case Contains(message.Text,"菜")||Contains(message.Text,"葉"):						
 							food = ""
@@ -253,7 +257,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							bot.PushMessage(strings.Replace(message.Text, "/join ", "", -1),linebot.NewTextMessage(profile[2] + "你好，已經幫你加入菜市場會員了，你現在可以開始買菜囉!!")).Do() 
 						case (uid==admin)&&Contains(message.Text,"/nojoin "):
 							bot.PushMessage(strings.Replace(message.Text, "/nojoin ", "", -1),linebot.NewTextMessage("經過我們的審核，你輸入的資料好像有點問題耶，可以請你重新申請一次嗎? 直接傳訊息說 我要加入 就可以了")).Do() 
-						case Contains(message.Text,"/w "):
+						case (uid==admin)&&Contains(message.Text,"/w "):
 							conn = strings.Replace(message.Text, "/w ", "", -1)
 							for e<=len(user_array){
 								var menu []string
