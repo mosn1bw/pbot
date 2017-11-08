@@ -249,9 +249,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "大概還有" + stock + "尾可以買，賣完就沒了喔!! 趕快來電088953096/0939220743黃先生")).Do() 
 							}
 	//指令集
-						case (uid==admin)||Contains(message.Text,"/join "):
+						case (uid==admin)&&Contains(message.Text,"/join "):
 							bot.PushMessage(strings.Replace(message.Text, "/join ", "", -1),linebot.NewTextMessage(profile[2] + "你好，已經幫你加入菜市場會員了，你現在可以開始買菜囉!!")).Do() 
-						case (uid==admin)||Contains(message.Text,"/nojoin "):
+						case (uid==admin)&&Contains(message.Text,"/nojoin "):
 							bot.PushMessage(strings.Replace(message.Text, "/nojoin ", "", -1),linebot.NewTextMessage("經過我們的審核，你輸入的資料好像有點問題耶，可以請你重新申請一次嗎? 直接傳訊息說 我要加入 就可以了")).Do() 
 						case Contains(message.Text,"/w "):
 							conn = strings.Replace(message.Text, "/w ", "", -1)
