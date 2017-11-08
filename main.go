@@ -159,6 +159,21 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							template := linebot.NewConfirmTemplate("你真的要幹我娘嗎?", linebot.NewMessageTemplateAction("Yes", "yes"),linebot.NewMessageTemplateAction("No", "no"))
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
+						
+						case Contains(message.Text,"操你媽"):
+							template := linebot.NewCarouselTemplate(
+								linebot.NewCarouselColumn(
+									imageURL, "hoge", "fuga",
+									linebot.NewURITemplateAction("Go to line.me", "https://line.me"),
+									linebot.NewPostbackTemplateAction("Say hello1", "hello こんにちは", ""),
+								),
+								linebot.NewCarouselColumn(
+									imageURL, "hoge", "fuga",
+									linebot.NewPostbackTemplateAction("言 hello2", "hello こんにちは", "hello こんにちは"),
+									linebot.NewMessageTemplateAction("Say message", "Rice=米"),
+								),
+							)
+						
 						case Contains(message.Text,"幫我查ID")||Contains(message.Text,"幫我查id"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
 						case Contains(message.Text,"幫我查群組ID")||Contains(message.Text,"幫我查群組id"):
