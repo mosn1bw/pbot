@@ -175,7 +175,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								),
 							)
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
-							bot.PushMessage(profile[0],messgage).Do() 
+							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
 						case Contains(message.Text,"菜單"):
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
