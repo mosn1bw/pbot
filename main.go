@@ -30,6 +30,8 @@ var admin string
 var url string
 var conn string
 var ppljoin string
+var b_day string
+var join_msg string
 
 func main() {
 	var err error
@@ -38,6 +40,9 @@ func main() {
 	url = "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
 	conn = ""
 	ppljoin = ""
+	b_day = ""
+	join_msg = ""
+	
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
 	log.Println("Bot:", bot, " err:", err)
 	http.HandleFunc("/callback", callbackHandler)
@@ -153,10 +158,16 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						case Contains(message.Text,"幫我查ID")||Contains(message.Text,"幫我查id"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
 						case ppljoin != "":
-							ppljoin = ppljoin + " " + message.Text
-							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text + "嗎? 好的，我幫你傳訊息給菜市場管理員請他幫你審核一下，請耐心等候喔，謝謝")).Do() 
-							bot.PushMessage(admin,linebot.NewTextMessage(ppljoin)).Do() 
+							join_msg = ppljoin + " " + message.Text
+							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text + "嗎? 好的，那請問您的生日是幾月幾號呢?")).Do() 
 							ppljoin = ""
+							b_day = "1"
+						case b_day != "":
+							join_msg = join_msg + " " + message.Text
+							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text + "嗎? 好，我幫你傳訊息給菜市場管理員請他幫你審核一下，請耐心等候喔，謝謝")).Do() 
+							bot.PushMessage(admin,linebot.NewTextMessage(join_msg)).Do() 
+							b_day = ""
+							join_msg = ""
 						case message.Text=="我要加入":
 							ppljoin = uid
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要加入Protoss菜市場嗎? 請問您叫什麼名字呢?")).Do() 
@@ -249,6 +260,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	//指令集
 						case (uid==admin)||Contains(message.Text,"/join "):
 							bot.PushMessage(strings.Replace(message.Text, "/join ", "", -1),linebot.NewTextMessage(profile[2] + "你好，已經幫你加入菜市場會員了，你現在可以開始買菜囉!!")).Do() 
+						case (uid==admin)||Contains(message.Text,"/nojoin "):
+							bot.PushMessage(strings.Replace(message.Text, "/nojoin ", "", -1),linebot.NewTextMessage("經過我們的審核，你輸入的資料好像有點問題耶，可以請你重新申請一次嗎? 直接傳訊息說 我要加入 就可以了")).Do() 
 						case Contains(message.Text,"/w "):
 							conn = strings.Replace(message.Text, "/w ", "", -1)
 							for e<=len(user_array){
