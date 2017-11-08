@@ -29,6 +29,7 @@ var bot *linebot.Client
 var admin string
 var url string
 var conn string
+var ppljoin string
 
 func main() {
 	var err error
@@ -36,7 +37,7 @@ func main() {
 	admin = "U83bb64e03c849e6ed897f9c556b0d4c1"
 	url = "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
 	conn = ""
-	
+	ppljoin = ""
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
 	log.Println("Bot:", bot, " err:", err)
 	http.HandleFunc("/callback", callbackHandler)
@@ -151,8 +152,14 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					switch {
 						case Contains(message.Text,"幫我查ID")||Contains(message.Text,"幫我查id"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
+						case ppljoin != "":
+							ppljoin = ppljoin + " " + message.Text
+							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text + "嗎? 好的，我幫你傳訊息給菜市場管理員請他幫你審核一下，請耐心等候喔，謝謝")).Do() 
+							bot.PushMessage(admin,linebot.NewTextMessage(ppljoin)).Do() 
+							ppljoin = ""
 						case message.Text=="我要加入":
-							bot.PushMessage(admin,linebot.NewTextMessage(uid)).Do() 
+							ppljoin = uid
+							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要加入Protoss菜市場嗎? 請問您叫什麼名字呢?")).Do() 
 	//賣菜的code
 						case Contains(message.Text,"菜")||Contains(message.Text,"葉"):						
 							food = ""
