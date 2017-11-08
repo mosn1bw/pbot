@@ -163,12 +163,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						case Contains(message.Text,"操你媽"):
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
-									imageURL, "hoge", "fuga",
+									cow, "hoge", "fuga",
 									linebot.NewURITemplateAction("Go to line.me", "https://line.me"),
 									linebot.NewPostbackTemplateAction("Say hello1", "hello こんにちは", ""),
 								),
 								linebot.NewCarouselColumn(
-									imageURL, "hoge", "fuga",
+									cow, "hoge", "fuga",
 									linebot.NewPostbackTemplateAction("言 hello2", "hello こんにちは", "hello こんにちは"),
 									linebot.NewMessageTemplateAction("Say message", "Rice=米"),
 								),
