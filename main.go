@@ -208,7 +208,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							av0 = strings.Split(av_array[av_rnd[0]], "@@")
 							var av1 []string
 							av1 = strings.Split(av_array[av_rnd[1]], "@@")
-							var av1 []string
+							var av2 []string
 							av2 = strings.Split(av_array[av_rnd[2]], "@@")
 						
 							template := linebot.NewCarouselTemplate(
