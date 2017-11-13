@@ -181,7 +181,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
 						case Contains(message.Text,"尻槍"):
-							av_count := 3
+							av_count := 2
 							rnd1:=r.Intn(av_count)
 							var av1 []string
 							av1 = strings.Split(av_array[rnd1], "@@")
