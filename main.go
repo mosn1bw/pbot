@@ -183,10 +183,10 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						case Contains(message.Text,"尻槍"):
 							av_count := 3
 						
-							var av_rnd [av_count+1]int
-							av_rnd[1] = r.Intn(av_count)+1
-							s:=2
-							for s<=av_count{
+							var av_rnd [av_count]int
+							av_rnd[0] = r.Intn(av_count)+1
+							s:=1
+							for s<=av_count-1{
 								av_rnd[s]=0
 								rnd:=r.Intn(av_count)+1
 								sc:=1
