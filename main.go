@@ -182,8 +182,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							bot.ReplyMessage(event.ReplyToken, messgage).Do() **/
 						case Contains(message.Text,"尻槍"):
 							//影片總數，兩個要一起改
-							av_count := 3
-							var av_rnd [3]int
+							av_count := 4
+							var av_rnd [4]int
 							
 							av_rnd[0] = r.Intn(av_count)+1
 							s:=1
