@@ -61,7 +61,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	var uid string
 	var list_array []string
 	var user_array []string
-	//var av_array []string
+	var av_array []string
 	if err != nil {
 		if err == linebot.ErrInvalidSignature {
 			w.WriteHeader(400)
@@ -104,7 +104,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
     	}
 	user_array = strings.Split(list, "@#@")
 	
-	/***
+	
 	fi3, err3 := os.Open("buffer/LoveLove.txt")
     	if err3 != nil {
         	fmt.Printf("Error: %s\n", err3)
@@ -121,7 +121,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		list = list + "@#@" + string(a)
     	}
 	av_array = strings.Split(list, "@#@")
-	***/
+	
 	
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
@@ -181,7 +181,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
 						case Contains(message.Text,"尻槍"):
-							/**av_count := 3
+							av_count := 3
 							rnd1:=r.Intn(av_count)
 							rnd2:=r.Intn(av_count)
 							rnd3:=r.Intn(av_count)
@@ -190,9 +190,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							var av2 []string
 							av2 = strings.Split(av_array[rnd2], "@@")
 							var av3 []string
-							av3 = strings.Split(av_array[rnd3], "@@")**/
+							av3 = strings.Split(av_array[rnd3], "@@")
 						
-							template := linebot.NewCarouselTemplate(
+							template := linebot.NewCarouselTemplate(/**
 								linebot.NewCarouselColumn(
 									url+"/LoveLove/SNIS-986.jpg", "三上悠亞", "SNIS-986 國民的アイドル アドレナリン大爆発！禁欲1ヶ月後の性欲剝き出し焦らされトランスFUCK",
 									linebot.NewURITemplateAction("我要幹死他!!", "https://drive.google.com/open?id=17eF6_X9yDxTNsyiXYLMHKlMgOU4O8yOz"),
@@ -200,11 +200,11 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								linebot.NewCarouselColumn(
 									url+"/LoveLove/SNIS-894.jpg", "瀬野みやび", "SNIS-894 新人NO.1 STYLE 現役著エロアイドルAV解禁",
 									linebot.NewURITemplateAction("我要幹死他!!", "http://www.5278.mobi/snis-894-%E6%96%B0%E4%BA%BAno-1-style-%E7%8F%BE%E5%BD%B9%E7%9D%80%E3%82%A8%E3%83%AD%E3%82%A2%E3%82%A4%E3%83%89%E3%83%ABav%E8%A7%A3%E7%A6%81-%E7%80%AC%E9%87%8E%E3%81%BF%E3%82%84%E3%81%B3.html"),
+								),**/
+								linebot.NewCarouselColumn(
+									url+"/LoveLove/" + av1[1], av1[2], av1[3],
+									linebot.NewURITemplateAction("我要幹死他!!", av1[4]),
 								),
-								//linebot.NewCarouselColumn(
-								//	url+"/LoveLove/" + av1[1], av1[2], av1[3],
-								//	linebot.NewURITemplateAction("我要幹死他!!", av1[4]),
-								//),
 							)
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
