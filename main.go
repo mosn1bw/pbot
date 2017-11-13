@@ -228,7 +228,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							)
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
-						case Contains(message.Text,"什麼菜")||Contains(message.Text,"有賣什麼")||Contains(message.Text,"菜單")||message.Text=="我想買菜":
+						case Contains(message.Text,"什麼菜")||Contains(message.Text,"菜單")||message.Text=="我想買菜":
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
 									url + "/vegetable/gau.jpg", "高麗菜", "起源韓國，中國製造",
