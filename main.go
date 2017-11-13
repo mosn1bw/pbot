@@ -176,28 +176,53 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				}else
 				{
 					switch {
-						case Contains(message.Text,"幹你娘"):
+						/**case Contains(message.Text,"幹你娘"):
 							template := linebot.NewConfirmTemplate("你真的要幹我娘嗎?", linebot.NewMessageTemplateAction("Yes", "yes"),linebot.NewMessageTemplateAction("No", "no"))
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
-							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
+							bot.ReplyMessage(event.ReplyToken, messgage).Do() **/
 						case Contains(message.Text,"尻槍"):
 							av_count := 3
-							rnd1:=r.Intn(av_count)+1
-							var av1 []string
-							av1 = strings.Split(av_array[rnd1], "@@")
 						
-							template := linebot.NewCarouselTemplate(/**
-								linebot.NewCarouselColumn(
-									url+"/LoveLove/SNIS-986.jpg", "三上悠亞", "SNIS-986 國民的アイドル アドレナリン大爆発！禁欲1ヶ月後の性欲剝き出し焦らされトランスFUCK",
-									linebot.NewURITemplateAction("我要幹死他!!", "https://drive.google.com/open?id=17eF6_X9yDxTNsyiXYLMHKlMgOU4O8yOz"),
-								),
-								linebot.NewCarouselColumn(
-									url+"/LoveLove/SNIS-894.jpg", "瀬野みやび", "SNIS-894 新人NO.1 STYLE 現役著エロアイドルAV解禁",
-									linebot.NewURITemplateAction("我要幹死他!!", "http://www.5278.mobi/snis-894-%E6%96%B0%E4%BA%BAno-1-style-%E7%8F%BE%E5%BD%B9%E7%9D%80%E3%82%A8%E3%83%AD%E3%82%A2%E3%82%A4%E3%83%89%E3%83%ABav%E8%A7%A3%E7%A6%81-%E7%80%AC%E9%87%8E%E3%81%BF%E3%82%84%E3%81%B3.html"),
-								),**/
+							var av_rnd [3]int
+							av_rnd[1] = r.Intn(av_count)+1
+							s:=2
+							for s<=av_count{
+								av_rnd[s]=0
+								rnd:=r.Intn(av_count)+1
+								sc:=1
+								for sc <= s-1{
+									if av_rnd[sc]==rnd{
+										av_rnd[s]=-1
+										break
+									}
+									sc++
+								}
+								if av_rnd[s]==0{
+									av_rnd[s] = rnd
+									s++
+								}
+							}
+							
+						
+							var av1 []string
+							av1 = strings.Split(av_array[av_rnd[1]], "@@")
+							var av2 []string
+							av2 = strings.Split(av_array[av_rnd[2]], "@@")
+							var av3 []string
+							av3 = strings.Split(av_array[av_rnd[3]], "@@")
+						
+							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
 									url+"/LoveLove/" + av1[1], av1[2], av1[3],
 									linebot.NewURITemplateAction("我要幹死他!!", av1[4]),
+								),
+								linebot.NewCarouselColumn(
+									url+"/LoveLove/" + av2[1], av2[2], av2[3],
+									linebot.NewURITemplateAction("我要幹死他!!", av2[4]),
+								),
+								linebot.NewCarouselColumn(
+									url+"/LoveLove/" + av2[1], av2[2], av2[3],
+									linebot.NewURITemplateAction("我要幹死他!!", av2[4]),
 								),
 							)
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
