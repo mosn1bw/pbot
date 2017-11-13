@@ -245,7 +245,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						case Contains(message.Text,"什麼魚")||message.Text=="我想買魚":
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
-									url + "/fish/blue.jpg", "青斑", "一斤330元，物美價廉，最適合一般家庭",
+									url + "/fish/bluef.jpg", "青斑", "一斤330元，物美價廉，最適合一般家庭",
 									linebot.NewMessageTemplateAction("我要買這個!!", "我要買青斑"),
 								),
 								linebot.NewCarouselColumn(
