@@ -189,7 +189,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							for s<=av_count-1{
 								av_rnd[s]=0
 								rnd:=r.Intn(av_count)+1
-								sc:=1
+								sc:=0
 								for sc <= s-1{
 									if av_rnd[sc]==rnd{
 										av_rnd[s]=-1
