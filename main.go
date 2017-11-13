@@ -181,9 +181,10 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 							bot.ReplyMessage(event.ReplyToken, messgage).Do() **/
 						case Contains(message.Text,"尻槍"):
+							//影片總數，兩個要一起改
 							av_count := 3
-						
 							var av_rnd [3]int
+							
 							av_rnd[0] = r.Intn(av_count)+1
 							s:=1
 							for s<=av_count-1{
@@ -203,7 +204,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								}
 							}
 							
-						
+							//隨機取三
 							var av0 []string
 							av0 = strings.Split(av_array[av_rnd[0]], "@@")
 							var av1 []string
@@ -230,12 +231,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						case Contains(message.Text,"菜單"):
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
-									"https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/vegetable/gau.jpg", "高麗菜", "起源韓國，中國製造",
+									url + "/vegetable/gau.jpg", "高麗菜", "起源韓國，中國製造",
 									linebot.NewMessageTemplateAction("老闆這個多少錢?", "請問高麗菜一斤多少?"),
 									linebot.NewMessageTemplateAction("我要買這個!!", "我要買高麗菜"),
 								),
 								linebot.NewCarouselColumn(
-									"https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/vegetable/hua.jpg", "花椰菜", "上面有蟲的部分最好吃",
+									url + "/vegetable/hua.jpg", "花椰菜", "上面有蟲的部分最好吃",
 									linebot.NewMessageTemplateAction("老闆這個多少錢?", "請問花椰菜一斤多少?"),
 									linebot.NewMessageTemplateAction("我要買這個!!", "我要買花椰菜"),
 								),
