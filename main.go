@@ -204,21 +204,21 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							}
 							
 						
+							var av0 []string
+							av0 = strings.Split(av_array[av_rnd[0]], "@@")
 							var av1 []string
 							av1 = strings.Split(av_array[av_rnd[1]], "@@")
-							var av2 []string
+							var av1 []string
 							av2 = strings.Split(av_array[av_rnd[2]], "@@")
-							var av3 []string
-							av3 = strings.Split(av_array[av_rnd[3]], "@@")
 						
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
-									url+"/LoveLove/" + av1[1], av1[2], av1[3],
-									linebot.NewURITemplateAction("我要幹死他!!", av1[4]),
+									url+"/LoveLove/" + av0[1], av0[2], av0[3],
+									linebot.NewURITemplateAction("我要幹死他!!", av0[4]),
 								),
 								linebot.NewCarouselColumn(
-									url+"/LoveLove/" + av2[1], av2[2], av2[3],
-									linebot.NewURITemplateAction("我要幹死他!!", av2[4]),
+									url+"/LoveLove/" + av1[1], av1[2], av1[3],
+									linebot.NewURITemplateAction("我要幹死他!!", av1[4]),
 								),
 								linebot.NewCarouselColumn(
 									url+"/LoveLove/" + av2[1], av2[2], av2[3],
