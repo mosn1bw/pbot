@@ -183,14 +183,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						case Contains(message.Text,"尻槍"):
 							av_count := 3
 							rnd1:=r.Intn(av_count)
-							rnd2:=r.Intn(av_count)
-							rnd3:=r.Intn(av_count)
 							var av1 []string
 							av1 = strings.Split(av_array[rnd1], "@@")
-							var av2 []string
-							av2 = strings.Split(av_array[rnd2], "@@")
-							var av3 []string
-							av3 = strings.Split(av_array[rnd3], "@@")
 						
 							template := linebot.NewCarouselTemplate(/**
 								linebot.NewCarouselColumn(
