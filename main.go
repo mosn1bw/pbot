@@ -232,12 +232,25 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
-									url + "/vegetable/gau.jpg", "高麗菜", "起源韓國，中國製造",
+									url + "/vegetable/gau.jpg", "高麗菜", "一斤50元，起源韓國，中國製造",
 									linebot.NewMessageTemplateAction("我要買這個!!", "我要買高麗菜"),
 								),
 								linebot.NewCarouselColumn(
-									url + "/vegetable/hua.jpg", "花椰菜", "上面有蟲的部分最好吃",
+									url + "/vegetable/hua.jpg", "花椰菜", "一斤55元，上面有蟲的部分最好吃",
 									linebot.NewMessageTemplateAction("我要買這個!!", "我要買花椰菜"),
+								),
+							)
+							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
+							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
+						case Contains(message.Text,"什麼魚")||message.Text=="我想買魚":
+							template := linebot.NewCarouselTemplate(
+								linebot.NewCarouselColumn(
+									url + "/fish/blue.jpg", "青斑", "一斤330元，物美價廉，最適合一般家庭",
+									linebot.NewMessageTemplateAction("我要買這個!!", "我要買青斑"),
+								),
+								linebot.NewCarouselColumn(
+									url + "/fish/dragontiger.jpg", "龍虎斑", "一斤350元，Q彈鮮嫩，最適合挑嘴的老饕",
+									linebot.NewMessageTemplateAction("我要買這個!!", "我要買龍虎斑"),
 								),
 							)
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
@@ -294,21 +307,23 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									case Contains(message.Text,"一斤多少")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 									case Contains(message.Text,"要買"):
-										if len(profile) > 0{
+										/**if len(profile) > 0{
 											bot.PushMessage(admin,linebot.NewTextMessage(profile[1] + profile[2] + "要買" + food)).Do() 
 											bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do()
 										}else{
 											bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買菜嗎? 可是你好像還不是我們菜市場的會員捏，麻煩跟管理員聯繫幫你加入菜市場會員，會員才有特別優惠喔!!")).Do() 	
-										}
+										}**/
+										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買" + food + "嗎? 趕快撥打 0909 022 890 跟鄉下小孩-張耀東買菜喔!!")).Do()
 								}
 							}else{
 								if Contains(message.Text,"要買"){
-									if len(profile) > 0{
+									/**if len(profile) > 0{
 										bot.PushMessage(admin,linebot.NewTextMessage(profile[1] + profile[2] + "要買菜")).Do() 
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買菜嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 	
 									}else{
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買菜嗎? 可是你好像還不是我們菜市場的會員捏，麻煩跟管理員聯繫幫你加入菜市場會員，會員才有特別優惠喔!!")).Do() 	
-									}
+									}**/
+									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買菜嗎? 趕快撥打 0909 022 890 跟鄉下小孩-張耀東買菜喔!!")).Do()
 								}
 							}
 	//石斑魚的code
@@ -343,22 +358,24 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
 									case Contains(message.Text,"還有多少")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存")||Contains(message.Text,"還有幾"):
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "大概還有" + stock + "尾可以買，賣完就沒了喔!! 趕快來電088953096/0939220743黃先生")).Do() 
-									case Contains(message.Text,"要買"):
+									case Contains(message.Text,"要買"):/**
 										if len(profile) > 0{
 											bot.PushMessage(admin,linebot.NewTextMessage(profile[1] + profile[2] + "要買" + food)).Do() 
 											bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do()
 										}else{
 											bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買魚嗎? 可是你好像還不是我們菜市場的會員捏，麻煩跟管理員聯繫幫你加入菜市場會員，會員才有特別優惠喔!!")).Do() 	
-										}
+										}**/
+										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買石斑嗎? 趕快撥打 0939 220 743 跟石斑膠膠哥-黃大哥買魚喔!!")).Do()
 								}
 							}else{
-								if Contains(message.Text,"要買"){
+								if Contains(message.Text,"要買"){/**
 									if len(profile) > 0{
 										bot.PushMessage(admin,linebot.NewTextMessage(profile[1] + profile[2] + "要買菜")).Do() 
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買魚嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 	
 									}else{
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買魚嗎? 可是你好像還不是我們菜市場的會員捏，麻煩跟管理員聯繫幫你加入菜市場會員，會員才有特別優惠喔!!")).Do() 	
-									}
+									}**/
+									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買石斑嗎? 趕快撥打 0939 220 743 跟石斑膠膠哥-黃大哥買魚喔!!")).Do()
 								}
 							}
 	//指令集
