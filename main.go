@@ -176,10 +176,10 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				}else
 				{
 					switch {
-						/**case Contains(message.Text,"幹你娘"):
-							template := linebot.NewConfirmTemplate("你真的要幹我娘嗎?", linebot.NewMessageTemplateAction("Yes", "yes"),linebot.NewMessageTemplateAction("No", "no"))
+						case Contains(message.Text,"艾魯"):
+							template := linebot.NewConfirmTemplate("大家覺得艾魯是不是該刪掉刀塔?", linebot.NewMessageTemplateAction("是", "是"),linebot.NewMessageTemplateAction("4", "4"),linebot.NewMessageTemplateAction("Yes", "Yes"))
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
-							bot.ReplyMessage(event.ReplyToken, messgage).Do() **/
+							bot.ReplyMessage(event.ReplyToken, messgage).Do()
 						case Contains(message.Text,"尻槍"):
 							//影片總數，兩個要一起改
 							av_count := 9
