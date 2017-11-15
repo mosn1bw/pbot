@@ -9,4 +9,4 @@ before_install:
 script:
     - go test -bench=. -benchmem ./...
     #- sh ./install_all_cmd.sh
-    go get -u gopkg.in/zabawaba99/firego.v1
+    
