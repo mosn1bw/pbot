@@ -218,7 +218,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							avtest[2]=fmt.Sprintf("%d", av_rnd[2])
 							alltest := avtest[0]+avtest[1]+avtest[2]
 						
-							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(alltest)).Do() 
+							bot.PushMessage(admin, linebot.NewTextMessage(alltest)).Do() 
 						
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
