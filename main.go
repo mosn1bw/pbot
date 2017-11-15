@@ -24,9 +24,8 @@ import (
 	"io/ioutil"
 
 	"github.com/line/line-bot-sdk-go/linebot"
+	"github.com/zabawaba99/firego"
 )
-import "log"
-import "github.com/zabawaba99/firego"
 
 var bot *linebot.Client
 var admin string
