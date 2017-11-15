@@ -177,7 +177,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				{
 					switch {
 						case message.Text=="寫入":
-							file, err := os.Create("test.txt")
+							file, err := os.Create("buffer/test.txt")
 							if err != nil {
 								// handle the error here
 								return
