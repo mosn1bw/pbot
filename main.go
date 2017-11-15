@@ -176,6 +176,15 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				}else
 				{
 					switch {
+						case message.Text=="寫入":
+							file, err := os.Create("test.txt")
+							if err != nil {
+								// handle the error here
+								return
+							}
+							defer file.Close()
+
+							file.WriteString("test")
 						case Contains(message.Text,"艾魯"):
 							template := linebot.NewConfirmTemplate("大家覺得艾魯是不是該刪掉刀塔?", linebot.NewMessageTemplateAction("是", "是"),linebot.NewMessageTemplateAction("4", "4"))
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
