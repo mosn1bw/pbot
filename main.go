@@ -212,7 +212,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							var av2 []string
 							av2 = strings.Split(av_array[av_rnd[2]], "@@")
 							
-							var avtest [2]string
+							var avtest [3]string
 							avtest[0]=fmt.Sprintf("%d", av_rnd[0])
 							avtest[1]=fmt.Sprintf("%d", av_rnd[1])
 							avtest[2]=fmt.Sprintf("%d", av_rnd[2])
