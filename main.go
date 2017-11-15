@@ -179,7 +179,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					switch {
 						case message.Text=="寫入":
 							d1 := []byte("hello\ngo\n")
-							err := ioutil.WriteFile("/buffer/test", d1, 0644)
+							err := ioutil.WriteFile("buffer/test", d1, 0644)
 						    	if err != nil {
 								fmt.Printf("Error: %s\n", err)
 								return
