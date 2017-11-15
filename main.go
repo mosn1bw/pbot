@@ -25,6 +25,8 @@ import (
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
+import "log"
+import "github.com/zabawaba99/firego"
 
 var bot *linebot.Client
 var admin string
@@ -37,6 +39,17 @@ var join_msg string
 func main() {
 	var err error
 	
+	fb := firego.New("https://protossbot.firebaseio.com", nil)
+	v := map[string]interface{}{
+		"name":     "SuperWang",
+		"location": "Beijing",
+		"age":      28,
+		"Likes":    []string{"Movie", "Football"},
+	}
+	
+    if err := fb.Set(v); err != nil {
+        log.Fatal(err)
+    }
 	admin = "U83bb64e03c849e6ed897f9c556b0d4c1"
 	url = "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
 	conn = ""
