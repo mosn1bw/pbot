@@ -177,14 +177,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				{
 					switch {
 						case message.Text=="寫入":
-							file, err := os.Create("buffer/test.txt")
-							if err != nil {
-								// handle the error here
-								return
-							}
-							defer file.Close()
-
-							file.WriteString("test")
+							d1 := []byte("hello\ngo\n")
+							err := ioutil.WriteFile("/buffer/test", d1, 0644)
 						case Contains(message.Text,"艾魯"):
 							template := linebot.NewConfirmTemplate("大家覺得艾魯是不是該刪掉刀塔?", linebot.NewMessageTemplateAction("是", "是"),linebot.NewMessageTemplateAction("4", "4"))
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
