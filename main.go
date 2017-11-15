@@ -213,9 +213,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							av2 = strings.Split(av_array[av_rnd[2]], "@@")
 							
 							var avtest [2]string
-							avtest[0]=av_rnd[0]
-							avtest[1]=av_rnd[1]
-							avtest[2]=av_rnd[2]
+							avtest[0]=fmt.Sprintf("%d", av_rnd[0])
+							avtest[1]=fmt.Sprintf("%d", av_rnd[1])
+							avtest[2]=fmt.Sprintf("%d", av_rnd[2])
 							alltest := avtest[0]+avtest[1]+avtest[2]
 						
 							bot.ReplyMessage(event.ReplyToken, alltest).Do() 
