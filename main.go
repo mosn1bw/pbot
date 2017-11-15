@@ -181,7 +181,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 							bot.ReplyMessage(event.ReplyToken, messgage).Do()
 						case Contains(message.Text,"尻槍"):
-							//影片總數，兩個要一起改
+							//影片總數
 							av_count := 9
 							var av_rnd [4]int
 							
@@ -212,6 +212,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							var av2 []string
 							av2 = strings.Split(av_array[av_rnd[2]], "@@")
 							
+						/** debug用
 							var avtest [3]string
 							avtest[0]=fmt.Sprintf("%d", av_rnd[0])
 							avtest[1]=fmt.Sprintf("%d", av_rnd[1])
@@ -219,7 +220,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							alltest := avtest[0]+avtest[1]+avtest[2]
 						
 							bot.PushMessage(admin, linebot.NewTextMessage(alltest)).Do() 
-						
+						*/
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
 									url+"/LoveLove/" + av0[1], av0[2], av0[3],
