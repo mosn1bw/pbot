@@ -426,8 +426,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("已成功與" + profile[2] + "連結，可以直接傳訊息開始通訊")).Do() 
 							bot.PushMessage(conn,linebot.NewTextMessage("老闆出現囉! 你現在可以跟他傳訊息了")).Do() 
 	//以下是喇賽的code
-						case Contains(message.Text,"87"):
-							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("87分，不能再高惹")).Do() 
 						case Contains(message.Text,"母牛")||Contains(message.Text,"洗眼")||Contains(message.Text,"乳牛")||Contains(message.Text,"淨化"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
 						case Contains(message.Text,"刀塔"):
