@@ -24,7 +24,7 @@ import (
 	"io/ioutil"
 
 	"github.com/line/line-bot-sdk-go/linebot"
-	"github.com/zabawaba99/firego"
+	"firego"
 )
 
 var bot *linebot.Client
