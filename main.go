@@ -211,8 +211,14 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							av1 = strings.Split(av_array[av_rnd[1]], "@@")
 							var av2 []string
 							av2 = strings.Split(av_array[av_rnd[2]], "@@")
+							
+							var avtest [2]string
+							avtest[0]=av_rnd[0]
+							avtest[1]=av_rnd[1]
+							avtest[2]=av_rnd[2]
+							alltest := avtest[0]+avtest[1]+avtest[2]
 						
-							bot.ReplyMessage(event.ReplyToken, av_array[av_rnd[0]]+av_array[av_rnd[1]]+av_array[av_rnd[2]]).Do() 
+							bot.ReplyMessage(event.ReplyToken, alltest).Do() 
 						
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
