@@ -37,7 +37,7 @@ var join_msg string
 func main() {
 	var err error
 	
-	admin = "ub5e4ae027d8d4a82736222b2a8dc77df"
+	admin = "U83bb64e03c849e6ed897f9c556b0d4c1"
 	url = "https://raw.githubusercontent.com/Yikaros/LineBotTemplate/master/images/"
 	conn = ""
 	ppljoin = ""
@@ -132,14 +132,14 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				//Grab user id and data
+				//抓user id跟資料
 				// 0 ID
-				// 1 customer code
-				// 2 name
-				// 3 birthday
-				// 4 preferences
-				// 5 phone
-				// 6 Communication status
+				// 1 客戶代號
+				// 2 姓名
+				// 3 生日
+				// 4 喜好
+				// 5 電話
+				// 6 通訊狀態
 				uid = event.Source.UserID
 				e:=0
 				var profile []string
@@ -166,8 +166,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									e++
 								}
 								conn = ""
-								bot.PushMessage(admin,linebot.NewTextMessage("Offline with "+profile[2]+")).Do() 
-								bot.PushMessage(conn,linebot.NewTextMessage("End the call with the boss")).Do() 
+								bot.PushMessage(admin,linebot.NewTextMessage("已與"+profile[2]+"離線")).Do() 
+								bot.PushMessage(conn,linebot.NewTextMessage("跟老闆結束通話囉")).Do() 
 							}else{
 								bot.PushMessage(conn,linebot.NewTextMessage(message.Text)).Do() 
 							}
@@ -177,18 +177,18 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				}else
 				{
 					switch {
-						case message.Text=="Sports list":
+						case message.Text=="s1":
 							d1 := []byte("hello\ngo\n")
 							err := ioutil.WriteFile("buffer/test", d1, 0644)
 						    	if err != nil {
 								fmt.Printf("Error: %s\n", err)
 								return
 							}
-						case Contains(message.Text,"Airu"):
+						case Contains(message.Text,"s2"):
 							template := linebot.NewConfirmTemplate("大家覺得艾魯是不是該刪掉刀塔?", linebot.NewMessageTemplateAction("是", "是"),linebot.NewMessageTemplateAction("4", "4"))
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 							bot.ReplyMessage(event.ReplyToken, messgage).Do()
-						case Contains(message.Text,"m1"):
+						case Contains(message.Text,"s3"):
 							//影片總數
 							av_count := 9
 							var av_rnd [4]int
@@ -212,7 +212,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								}
 							}
 							
-							//Take three at random
+							//隨機取三
 							var av0 []string
 							av0 = strings.Split(av_array[av_rnd[0]], "@@")
 							var av1 []string
@@ -245,7 +245,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							)
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
-						case Contains(message.Text,"What dishes")||Contains(message.Text,"menu")||message.Text=="I want to buy food":
+						case Contains(message.Text,"a9")||Contains(message.Text,"菜單")||message.Text=="我想買菜":
 							
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
@@ -259,7 +259,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							)
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
-						case Contains(message.Text,"m2")||message.Text=="我想買魚":
+						case Contains(message.Text,"a8")||message.Text=="我想買魚":
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
 									url + "/fish/bluef.jpg", "青斑", "一斤330元，物美價廉，最適合一般家庭",
@@ -272,9 +272,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							)
 							messgage := linebot.NewTemplateMessage("Sorry :(, please update your app.", template)
 							bot.ReplyMessage(event.ReplyToken, messgage).Do() 
-						case Contains(message.Text,"m3")||Contains(message.Text,"幫我查id"):
+						case Contains(message.Text,"幫我查ID")||Contains(message.Text,"幫我查id"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(uid)).Do() 
-						case Contains(message.Text,"m4")||Contains(message.Text,"幫我查群組id"):
+						case Contains(message.Text,"幫我查群組ID")||Contains(message.Text,"幫我查群組id"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(event.Source.GroupID)).Do() 
 						case ppljoin != "":
 							join_msg = ppljoin + " " + message.Text
@@ -287,7 +287,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							bot.PushMessage(admin,linebot.NewTextMessage(join_msg)).Do() 
 							b_day = ""
 							join_msg = ""
-						case message.Text=="m5":
+						case message.Text=="a7":
 							if len(profile) > 0{
 								bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(profile[2] + "你已經是菜市場的會員囉，不用再申請加入啦")).Do()
 							}else{
@@ -295,7 +295,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要加入Protoss菜市場嗎? 請問您叫什麼名字呢?")).Do() 
 							}
 	//賣菜的code
-						case Contains(message.Text,"m6")||Contains(message.Text,"葉"):						
+						case Contains(message.Text,"a6")||Contains(message.Text,"葉"):						
 							food = ""
 							switch{
 								case Contains(message.Text,"高麗菜"):
@@ -321,9 +321,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									i++
 								}
 								switch{
-									case Contains(message.Text,"m7")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
+									case Contains(message.Text,"a5")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
-									case Contains(message.Text,"m8"):
+									case Contains(message.Text,"a4"):
 										/**if len(profile) > 0{
 											bot.PushMessage(admin,linebot.NewTextMessage(profile[1] + profile[2] + "要買" + food)).Do() 
 											bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do()
@@ -333,7 +333,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買" + food + "嗎? 趕快撥打 0909 022 890 跟鄉下小孩-張耀東買菜喔!!")).Do()
 								}
 							}else{
-								if Contains(message.Text,"m9"){
+								if Contains(message.Text,"a3"){
 									/**if len(profile) > 0{
 										bot.PushMessage(admin,linebot.NewTextMessage(profile[1] + profile[2] + "要買菜")).Do() 
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買菜嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 	
@@ -344,17 +344,17 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 								}
 							}
 	//石斑魚的code
-						case Contains(message.Text,"m10")||Contains(message.Text,"班"):
+						case Contains(message.Text,"a1")||Contains(message.Text,"班"):
 							food = ""
 							switch{
-								case Contains(message.Text,"龍虎"):
+								case Contains(message.Text,"a2"):
 									food = "龍虎石斑"
 								case Contains(message.Text,"青"):
 									food = "青斑"
 								case Contains(message.Text,"珍珠"):
 									food = "珍珠石斑"
 								default:
-									if Contains(message.Text,"m11")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算")||Contains(message.Text,"還有多少")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存")||Contains(message.Text,"還有幾"){
+									if Contains(message.Text,"一斤多少")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算")||Contains(message.Text,"還有多少")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存")||Contains(message.Text,"還有幾"){
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("拍謝啦! 我是笨笨的電腦，不知道您要問哪種石斑捏，我們有龍虎石斑、青斑、還有珍珠石斑")).Do()
 									}
 							}
@@ -371,11 +371,11 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									i++
 								}
 								switch{
-									case Contains(message.Text,"m12")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
+									case Contains(message.Text,"w5")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "一斤" + price)).Do() 
-									case Contains(message.Text,"m13")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存")||Contains(message.Text,"還有幾"):
+									case Contains(message.Text,"w6")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存")||Contains(message.Text,"還有幾"):
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "大概還有" + stock + "尾可以買，賣完就沒了喔!! 趕快來電088953096/0939220743黃先生")).Do() 
-									case Contains(message.Text,"m14"):/**
+									case Contains(message.Text,"w7"):/**
 										if len(profile) > 0{
 											bot.PushMessage(admin,linebot.NewTextMessage(profile[1] + profile[2] + "要買" + food)).Do() 
 											bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(food + "嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do()
@@ -385,7 +385,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買石斑嗎? 趕快撥打 0939 220 743 跟石斑膠膠哥-黃大哥買魚喔!!")).Do()
 								}
 							}else{
-								if Contains(message.Text,"m15"){/**
+								if Contains(message.Text,"w4"){/**
 									if len(profile) > 0{
 										bot.PushMessage(admin,linebot.NewTextMessage(profile[1] + profile[2] + "要買菜")).Do() 
 										bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買魚嗎? 我已經幫你聯絡老闆了，晚點他就會主動跟你聯繫，請耐心等一下喔")).Do() 	
@@ -426,11 +426,11 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("已成功與" + profile[2] + "連結，可以直接傳訊息開始通訊")).Do() 
 							bot.PushMessage(conn,linebot.NewTextMessage("老闆出現囉! 你現在可以跟他傳訊息了")).Do() 
 	//以下是喇賽的code
-						case Contains(message.Text,"m17")||Contains(message.Text,"洗眼")||Contains(message.Text,"乳牛")||Contains(message.Text,"淨化"):
+						case Contains(message.Text,"w1")||Contains(message.Text,"洗眼")||Contains(message.Text,"乳牛")||Contains(message.Text,"淨化"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
-						case Contains(message.Text,"m18"):
+						case Contains(message.Text,"w2"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(url + "6569950-1490833625.jpg", url + "6569950-1490833625.jpg")).Do() 
-						case Contains(message.Text,"m19"):
+						case Contains(message.Text,"w3"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(url + "blackman.jpg", url + "blackman.jpg")).Do() 					
 					}
 				}
