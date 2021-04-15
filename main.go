@@ -262,7 +262,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						case Contains(message.Text,"a8")||message.Text=="我想買魚":
 							template := linebot.NewCarouselTemplate(
 								linebot.NewCarouselColumn(
-									url + "/fish/bluef.jpg", "青斑", "一斤330元，物美價廉，最適合一般家庭",
+									url + "https://lh3.googleusercontent.com/-wV-K_ZyeaXE/YHdNYUIN1aI/AAAAAAAABIE/Uq7xL6i_CkYhrkb_23kuGFqNHJ13KF7vwCK8BGAsYHg/s512/2021-04-14.jpg", "reza", "niki",
 									linebot.NewMessageTemplateAction("我要買這個!!", "我要買青斑"),
 								),
 								linebot.NewCarouselColumn(
@@ -289,6 +289,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 							join_msg = ""
 						case message.Text=="a7":
 							if len(profile) > 0{
+								bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(profile[2] + "你已經是菜市場的會員囉，不用再申請加入啦")).Do()
+								bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(profile[2] + "你已經是菜市場的會員囉，不用再申請加入啦")).Do()
+								bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(profile[2] + "你已經是菜市場的會員囉，不用再申請加入啦")).Do()
 								bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(profile[2] + "你已經是菜市場的會員囉，不用再申請加入啦")).Do()
 							}else{
 								ppljoin = uid
