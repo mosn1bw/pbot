@@ -373,11 +373,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									}
 									i++
 								}
-								switch{
-									case Contains(message.Text,"w5")||Contains(message.Text,"多少錢")||Contains(message.Text,"怎麼賣")||Contains(message.Text,"怎麼算"):
-										bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage("https://www.itsfun.com.tw/cacheimg/41/ac/f9e580eb9cbd38241182198bcb1b.jpg","https://www.itsfun.com.tw/cacheimg/41/ac/f9e580eb9cbd38241182198bcb1b.jpg")).Do()}
-									case Contains(message.Text,"w6")||Contains(message.Text,"剩下多少")||Contains(message.Text,"庫存")||Contains(message.Text,"還有幾"):
-										bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage("htt666666644444444444444446666661111")).Do()}
 									case Contains(message.Text,"w7"):/**
 										if len(profile) > 0{
 											bot.PushMessage(admin,linebot.NewTextMessage(profile[1] + profile[2] + "要買" + food)).Do() 
@@ -398,36 +393,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 									bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("你要買石斑嗎? 趕快撥打 0939 220 743 跟石斑膠膠哥-黃大哥買魚喔!!")).Do()
 								}
 							}
-	//指令集
-						case (uid==admin)&&Contains(message.Text,"/join "):
-							s:=0
-							var profile2 []string
-							for s<=len(user_array)-1{
-								var menu []string
-								menu = strings.Split(user_array[e], " & ")
-								if menu[0] == strings.Replace(message.Text, "/join ", "", -1){
-									profile2 = strings.Split(user_array[e], " & ")
-									break
-								}
-								e++
-							}
-							bot.PushMessage(strings.Replace(message.Text, "/join ", "", -1),linebot.NewTextMessage(profile2[2] + "你好，已經幫你加入菜市場會員了，你現在可以開始買菜囉!!")).Do() 
-						case (uid==admin)&&Contains(message.Text,"/nojoin "):
-							bot.PushMessage(strings.Replace(message.Text, "/nojoin ", "", -1),linebot.NewTextMessage("經過我們的審核，你輸入的資料好像有點問題耶，可以請你重新申請一次嗎? 直接傳訊息說 我要加入 就可以了")).Do() 
-						case (uid==admin)&&Contains(message.Text,"/w "):
-							conn = strings.Replace(message.Text, "/w ", "", -1)
-							for e<=len(user_array){
-								var menu []string
-								menu = strings.Split(user_array[e], " & ")
-								if menu[1] == conn{
-									profile = strings.Split(user_array[e], " & ")
-									conn = profile[0]
-									break
-								}
-								e++
-							}
-							bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("已成功與" + profile[2] + "連結，可以直接傳訊息開始通訊")).Do() 
-							bot.PushMessage(conn,linebot.NewTextMessage("老闆出現囉! 你現在可以跟他傳訊息了")).Do() 
 	//以下是喇賽的code
 						case Contains(message.Text,"w1")||Contains(message.Text,"洗眼")||Contains(message.Text,"乳牛")||Contains(message.Text,"淨化"):
 							bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(cow,cow)).Do() 
